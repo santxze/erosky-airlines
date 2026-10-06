@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AeroSky Airlines — Seu próximo destino começa aqui</title>
+<meta name="description" content="Encontre voos para destinos incríveis e viaje com conforto, segurança e praticidade. AeroSky Airlines.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230A1C3D'/><text x='50' y='66' font-size='48' text-anchor='middle' fill='%23C9A24B'>✈</text></svg>">
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header header-transparent" id="header">
+  <div class="header-inner">
+    <a href="#inicio" class="brand" aria-label="AeroSky Airlines">
+      <span class="brand-mark">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M2.5 12.5 21 4l-6.5 17-3-6.5-9-2Zm9 2L9 19l1.5-4.5L21 4 11.5 14.5Z" fill="#E9CE8F"/></svg>
+      </span>
+      <span class="brand-name">AeroSky<small>AIRLINES</small></span>
+    </a>
+    <nav class="nav" aria-label="Menu principal">
+      <a href="#inicio" class="active">Início</a>
+      <a href="#ofertas">Passagens</a>
+      <a href="#destinos">Destinos</a>
+      <a href="#" data-modal="trips">Minhas viagens</a>
+      <a href="#" data-modal="checkin">Check-in</a>
+      <a href="#clube">Programa de fidelidade</a>
+      <a href="#" data-modal="help">Ajuda</a>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-login" data-modal="login">Entrar</button>
+      <a href="#buscar" class="btn-buy">Comprar passagem</a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- Menu mobile -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#inicio">Início</a>
+  <a href="#ofertas">Passagens</a>
+  <a href="#destinos">Destinos</a>
+  <a href="#" data-modal="trips">Minhas viagens</a>
+  <a href="#" data-modal="checkin">Check-in</a>
+  <a href="#clube">Programa de fidelidade</a>
+  <a href="#" data-modal="help">Ajuda</a>
+  <div class="m-actions">
+    <button class="btn btn-ghost" data-modal="login">Entrar</button>
+    <a href="#buscar" class="btn btn-gold">Comprar passagem</a>
+  </div>
+</div>
+
+<!-- ================= HERO + BUSCA ================= -->
+<section class="hero" id="inicio" style="padding-top:calc(var(--header-h) + 30px)">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=2000&q=80" alt="Avião AeroSky em voo" fetchpriority="high" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=2000&q=80'">
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="live"><i></i>AO VIVO</span> +120 destinos · Wi-Fi a bordo · Pontualidade 94%</div>
+    <h1>Seu próximo destino <em>começa aqui.</em></h1>
+    <p class="sub">Encontre voos para destinos incríveis e viaje com conforto, segurança e praticidade.</p>
+    <div class="hero-stats">
+      <div><strong>4.9<span>★</span></strong><small>42 mil avaliações</small></div>
+      <div><strong>120<span>+</span></strong><small>Destinos no mundo</small></div>
+      <div><strong>98<span>%</span></strong><small>Voos no horário</small></div>
+    </div>
+
+    <!-- Card de busca -->
+    <div class="search-card" id="buscar">
+      <div class="search-tabs" role="tablist">
+        <button class="trip-tab active" data-trip="round">⟷ &nbsp;Ida e volta</button>
+        <button class="trip-tab" data-trip="oneway">→ &nbsp;Somente ida</button>
+        <span style="margin-left:auto;font-size:.82rem;color:var(--muted);font-weight:600" id="tripHint">🛫 Melhor preço garantido</span>
+      </div>
+      <form id="searchForm" novalidate>
+        <div class="search-grid">
+          <div class="field">
+            <label for="origem">Origem</label>
+            <div class="field-control">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 8 12 8 12s8-6.6 8-12a8 8 0 0 0-8-8Z"/></svg>
+              <input list="airports" id="origem" placeholder="De onde você sai?" autocomplete="off">
+            </div>
+            <div class="field-error" id="err-origem">Informe a cidade de origem.</div>
+          </div>
+          <button type="button" class="swap-btn" id="swapBtn" title="Inverter origem e destino">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 16V4M7 4 3 8M7 4l4 4M17 8v12m0 0 4-4m-4 4-4-4"/></svg>
+          </button>
+          <div class="field">
+            <label for="destino">Destino</label>
+            <div class="field-control">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 8 12 8 12s8-6.6 8-12a8 8 0 0 0-8-8Z"/></svg>
+              <input list="airports" id="destino" placeholder="Para onde você vai?" autocomplete="off">
+            </div>
+            <div class="field-error" id="err-destino">Informe a cidade de destino.</div>
+          </div>
+          <div class="field">
+            <label for="ida">Data de ida</label>
+            <div class="field-control">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              <input type="date" id="ida">
+            </div>
+            <div class="field-error" id="err-ida">Escolha uma data futura.</div>
+          </div>
+          <div class="field">
+            <label for="volta">Data de volta</label>
+            <div class="field-control">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              <input type="date" id="volta">
+            </div>
+            <div class="field-error" id="err-volta">A volta deve ser após a ida.</div>
+          </div>
+          <div class="field">
+            <label for="classe">Classe</label>
+            <div class="field-control">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 11 6.5 6h11L19 11m-14 0h14a1 1 0 0 1 1 1v6H4v-6a1 1 0 0 1 1-1Zm3 6v2m8-2v2"/></svg>
+              <select id="classe">
+                <option>Econômica</option>
+                <option>Econômica Premium</option>
+                <option>Executiva</option>
+                <option>Primeira Classe</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <datalist id="airports">
+          <option value="São Paulo (GRU)"></option>
+          <option value="Rio de Janeiro (GIG)"></option>
+          <option value="Brasília (BSB)"></option>
+          <option value="Salvador (SSA)"></option>
+          <option value="Lisboa (LIS)"></option>
+          <option value="Paris (CDG)"></option>
+          <option value="Nova York (JFK)"></option>
+          <option value="Miami (MIA)"></option>
+          <option value="Londres (LHR)"></option>
+          <option value="Dubai (DXB)"></option>
+          <option value="Roma (FCO)"></option>
+          <option value="Tóquio (HND)"></option>
+          <option value="Buenos Aires (EZE)"></option>
+        </datalist>
+        <div class="search-footer">
+          <div class="pax-wrap">
+            <div class="field-control">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="z-index:1"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <button type="button" class="pax-btn" id="paxBtn">1 passageiro</button>
+            </div>
+            <div class="pax-pop" id="paxPop">
+              <div class="pax-row"><div><strong>Adultos</strong><small>12 anos ou mais</small></div><div class="stepper"><button type="button" data-pax="adt" data-op="-">−</button><b id="nAdt">1</b><button type="button" data-pax="adt" data-op="+">+</button></div></div>
+              <div class="pax-row"><div><strong>Crianças</strong><small>2 a 11 anos</small></div><div class="stepper"><button type="button" data-pax="chd" data-op="-">−</button><b id="nChd">0</b><button type="button" data-pax="chd" data-op="+">+</button></div></div>
+              <div class="pax-row"><div><strong>Bebês</strong><small>Menores de 2 anos</small></div><div class="stepper"><button type="button" data-pax="inf" data-op="-">−</button><b id="nInf">0</b><button type="button" data-pax="inf" data-op="+">+</button></div></div>
+            </div>
+          </div>
+          <span class="search-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Remarcação flexível · Sem taxa oculta · Milhas em dobro hoje</span>
+          <button type="submit" class="btn btn-primary btn-search">🔍 &nbsp;Buscar voos</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRUST BAR ================= -->
+<div class="trust">
+  <div class="trust-inner">
+    <div class="trust-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg></span><div><strong>Segurança certificada</strong><small>Auditoria IOSA · Frota nova</small></div></div>
+    <div class="trust-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><div><strong>Pontualidade 94%</strong><small>Top 3 no ranking latino</small></div></div>
+    <div class="trust-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg></span><div><strong>Wi-Fi Starlink a bordo</strong><small>Internet rápida e grátis</small></div></div>
+    <div class="trust-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></span><div><strong>Remarcação flexível</strong><small>Sem multa em 24h</small></div></div>
+  </div>
+</div>
+
+<!-- ================= OFERTAS ================= -->
+<section id="ofertas">
+  <div class="container">
+    <div class="section-head reveal">
+      <div><span class="eyebrow"><span class="dot"></span> Ofertas por tempo limitado</span>
+        <h2 class="section-title">Ofertas para sua próxima viagem</h2>
+        <p class="section-sub">Preços de ida e volta com taxas incluídas. Valores fictícios para demonstração.</p></div>
+      <a href="#buscar" class="link-more">Ver todas →</a>
+    </div>
+    <div class="offers-grid" id="offersGrid"><!-- renderizado via app.js --></div>
+  </div>
+</section>
+
+<!-- ================= DESTINOS ================= -->
+<section class="destinations" id="destinos">
+  <div class="container">
+    <div class="section-head reveal">
+      <div><span class="eyebrow gold"><span class="dot"></span> Inspire-se</span>
+        <h2 class="section-title">Destinos populares</h2>
+        <p class="section-sub">Os lugares mais amados pelos nossos viajantes — com voos diretos AeroSky.</p></div>
+      <a href="#buscar" class="link-more" style="color:#fff">Explorar mapa →</a>
+    </div>
+    <div class="dest-grid" id="destGrid"><!-- renderizado via app.js --></div>
+  </div>
+</section>
+
+<!-- ================= EXPERIÊNCIA ================= -->
+<section id="experiencia">
+  <div class="container">
+    <div style="text-align:center;max-width:680px;margin:0 auto 44px" class="reveal">
+      <span class="eyebrow"><span class="dot"></span> A bordo</span>
+      <h2 class="section-title">Experiência AeroSky</h2>
+      <p class="section-sub" style="margin:0 auto">Cada detalhe foi desenhado para você chegar melhor do que partiu.</p>
+    </div>
+    <div class="exp-grid">
+      <div class="exp-card reveal"><div class="exp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg></div><h3>Wi-Fi durante o voo</h3><p>Internet via satélite de alta velocidade em 100% da frota internacional. Grátis para membros Club.</p></div>
+      <div class="exp-card reveal reveal-d1"><div class="exp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="3"/><path d="m10 9 5 3-5 3V9Z"/></svg></div><h3>Entretenimento a bordo</h3><p>Tela 4K de 13”, 400+ filmes, séries, jogos e TV ao vivo direto no seu assento.</p></div>
+      <div class="exp-card reveal reveal-d2"><div class="exp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 2v20M7 8h14l-2.5 4L21 16H7"/></svg></div><h3>Refeições selecionadas</h3><p>Menu assinado por chefs premiados, com opções veganas, kosher e regionais.</p></div>
+      <div class="exp-card reveal"><div class="exp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 11 6.5 6h11L19 11m-14 0h14a1 1 0 0 1 1 1v6H4v-6a1 1 0 0 1 1-1Zm3 6v2m8-2v2"/></svg></div><h3>Assentos confortáveis</h3><p>Até 34” de espaço na Econômica e 180° de reclinação total na Executiva.</p></div>
+      <div class="exp-card reveal reveal-d1"><div class="exp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><h3>Programa de fidelidade</h3><p>Acumule até 2,5 pontos por dólar e troque por upgrades, lounges e passagens.</p></div>
+      <div class="exp-card reveal reveal-d2"><div class="exp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.6 2.81.72A2 2 0 0 1 22 16.92Z"/></svg></div><h3>Atendimento 24 horas</h3><p>Suporte humano em PT, EN e ES pelo app, WhatsApp e telefone — todos os dias.</p></div>
+    </div>
+    <div class="exp-banner reveal">
+      <div><h3>Frota nova: <span>Airbus A350 + Boeing 787</span></h3><p>Idade média de 3,2 anos. Cabines mais silenciosas, ar filtrado HEPA e 25% menos emissões.</p></div>
+      <div class="exp-stats">
+        <div><strong><span data-count="48">0</span></strong><small>Aeronaves</small></div>
+        <div><strong><span data-count="120">0</span>+</strong><small>Destinos</small></div>
+        <div><strong><span data-count="9">0</span>M</strong><small>Passageiros/ano</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CLUBE ================= -->
+<section class="club" id="clube">
+  <div class="container club-wrap">
+    <div class="reveal">
+      <span class="eyebrow gold"><span class="dot"></span> Fidelidade</span>
+      <h2 class="section-title">AeroSky Club</h2>
+      <p class="section-sub">Viaje, acumule pontos e desbloqueie um novo jeito de voar. Cada voo conta — e cada ponto vira benefício real.</p>
+      <div class="club-tiers">
+        <div class="tier silver"><span class="tier-badge">S</span><div><strong>Silver — grátis ao cadastrar</strong><small>1 ponto por US$ 1 · bagagem prioritária</small></div></div>
+        <div class="tier gold"><span class="tier-badge">G</span><div><strong>Gold — 25.000 pontos</strong><small>1,5 pt por US$ 1 · upgrades + lounge</small></div></div>
+        <div class="tier diamond"><span class="tier-badge">D</span><div><strong>Diamond — 60.000 pontos</strong><small>2,5 pt por US$ 1 · primeira classe + concierge</small></div></div>
+      </div>
+      <div class="club-perks">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Passagens</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Upgrade de cabine</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Bagagem extra</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Acesso a lounges</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Benefícios exclusivos</span>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+        <button class="btn btn-gold btn-lg" data-modal="club">Conhecer o AeroSky Club</button>
+        <a href="#buscar" class="btn btn-ghost btn-lg">Acumular pontos</a>
+      </div>
+    </div>
+    <div class="club-card-visual reveal reveal-d1">
+      <div class="fidelity-card">
+        <div class="fc-top"><small>AEROSKY CLUB</small><span class="fc-brand">✈ AeroSky <small>GOLD</small></span></div>
+        <div class="fc-chip"></div>
+        <div class="fc-number">4021 &nbsp; 8804 &nbsp; 3315 &nbsp; 2026</div>
+        <div class="fc-bottom"><div><small>MEMBRO</small><strong>MARIA S. OLIVEIRA</strong></div><div><small>PONTOS</small><strong>48.320 pts</strong></div></div>
+      </div>
+      <div class="club-float f1"><span class="n">+2.480</span> pontos no voo GRU → LIS</div>
+      <div class="club-float f2"><span class="n">✦</span> Upgrade para Executiva liberado</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= APP ================= -->
+<section class="app-section" id="app">
+  <div class="container app-wrap">
+    <div class="reveal">
+      <span class="eyebrow gold"><span class="dot"></span> App AeroSky</span>
+      <h2 class="section-title" style="color:#fff">Sua viagem no bolso</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.65)">Do check-in ao desembarque, tudo em um toque. Nota 4.9 nas lojas.</p>
+      <div class="app-feats">
+        <div class="app-feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><div><strong>Check-in pelo celular</strong><small>Em 30 segundos, com escolha de assento no mapa 3D.</small></div></div>
+        <div class="app-feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20"/></svg></span><div><strong>Cartão de embarque digital</strong><small>Wallet + QR offline. Sem papel, sem fila.</small></div></div>
+        <div class="app-feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><div><strong>Acompanhamento do voo em tempo real</strong><small>Portão, esteira e atrasos com alerta push.</small></div></div>
+        <div class="app-feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M10.3 21a2 2 0 0 0 3.4 0"/></svg></span><div><strong>Notificações inteligentes + reservas</strong><small>Gerencie remarcação, bagagem e extras sem ligar.</small></div></div>
+      </div>
+      <div class="store-btns">
+        <a href="#app" class="store-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.6 5.98.22 7.13-.57 1.5-1.31 2.99-2.27 4.08ZM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25Z"/></svg><span><small>Baixar na</small><strong>App Store</strong></span></a>
+        <a href="#app" class="store-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 2.5v19l11-9.5L3 2.5Zm13.5 7.5L5.6 2.8l11.6 6.4 3.1-1.4-3.8 2.2Zm0 0 3.8 2.2-3.1-1.4L5.6 21.2l10.9-7.2Z"/></svg><span><small>Disponível no</small><strong>Google Play</strong></span></a>
+      </div>
+    </div>
+    <div class="reveal reveal-d1">
+      <div class="phone-mock">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-greet">Boa tarde ✈<strong>Maria, seu voo decola em 2h</strong></div>
+          <div class="boarding">
+            <div class="route"><span>GRU<small>São Paulo</small></span><span style="color:var(--gold-dark)">✈</span><span style="text-align:right">LIS<small>Lisboa</small></span></div>
+            <div class="plane-line"><span style="font-size:.72rem;font-weight:800">ASK 8402 · 8h 45m · Direto</span></div>
+            <div class="meta"><div><small>Portão</small><strong>22B</strong></div><div><small>Assento</small><strong>14A</strong></div><div><small>Embarque</small><strong>21:40</strong></div></div>
+            <div class="barcode"></div>
+          </div>
+          <div class="phone-mini"><div>🧳 Bagagem: porão OK</div><div>☕ Lounge: acesso Gold</div></div>
+          <div class="phone-btn">Abrir cartão de embarque</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NEWSLETTER ================= -->
+<section class="newsletter">
+  <div class="container">
+    <div class="news-box reveal">
+      <h2>Receba <span>ofertas exclusivas</span></h2>
+      <p>Promoções relâmpago, erros de tarifa e vendas antecipadas — direto no seu e-mail, antes de todo mundo.</p>
+      <form class="news-form" id="newsForm" novalidate>
+        <input type="email" id="newsEmail" placeholder="Seu melhor e-mail" aria-label="E-mail">
+        <button type="submit" class="btn btn-gold">Quero receber ofertas</button>
+      </form>
+      <div class="news-note">🔒 Sem spam. Cancele quando quiser. +380 mil viajantes inscritos.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#inicio" class="brand"><span class="brand-mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M2.5 12.5 21 4l-6.5 17-3-6.5-9-2Zm9 2L9 19l1.5-4.5L21 4 11.5 14.5Z" fill="#E9CE8F"/></svg></span><span class="brand-name">AeroSky<small>AIRLINES</small></span></a>
+        <p>A companhia que une tecnologia, conforto e hospitalidade brasileira para conectar você ao mundo.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L1.6 2H8l4.4 5.9L18.9 2Zm-1.1 18h1.7L7 3.9H5.2L17.8 20Z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 12s0-3.4-.4-5A2.8 2.8 0 0 0 20.1 5C18.4 4.5 12 4.5 12 4.5s-6.4 0-8.1.5A2.8 2.8 0 0 0 1.9 7c-.4 1.6-.4 5-.4 5s0 3.4.4 5a2.8 2.8 0 0 0 2 2c1.7.5 8.1.5 8.1.5s6.4 0 8.1-.5a2.8 2.8 0 0 0 2-2c.4-1.6.4-5 .4-5ZM9.8 15.5v-7l6 3.5-6 3.5Z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.24 8.31h4.52V23H.24V8.31Zm7.98 0h4.33v2h.06c.6-1.14 2.08-2.34 4.28-2.34 4.58 0 5.42 3.01 5.42 6.92V23h-4.51v-7.1c0-1.7-.03-3.88-2.36-3.88-2.37 0-2.73 1.85-2.73 3.76V23H8.22V8.31Z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3V2Z"/></svg></a>
+        </div>
+      </div>
+      <div><h4>Empresa</h4><ul><li><a href="#">Sobre a AeroSky</a></li><li><a href="#">Trabalhe conosco</a></li><li><a href="#">Imprensa</a></li><li><a href="#">Sustentabilidade</a></li><li><a href="#">Contato</a></li></ul></div>
+      <div><h4>Ajuda</h4><ul><li><a href="#">Central de ajuda</a></li><li><a href="#" data-modal="checkin">Check-in</a></li><li><a href="#">Bagagens</a></li><li><a href="#" data-modal="trips">Minhas viagens</a></li><li><a href="#">Reembolsos</a></li></ul></div>
+      <div><h4>Viaje</h4><ul><li><a href="#destinos">Destinos</a></li><li><a href="#ofertas">Passagens</a></li><li><a href="#clube">Programa de fidelidade</a></li><li><a href="#app">Aplicativo</a></li><li><a href="#experiencia">A bordo</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="#">Política de privacidade</a></li><li><a href="#">Termos de uso</a></li><li><a href="#">Contrato de transporte</a></li><li><a href="#">LGPD</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 AeroSky Airlines · CNPJ 00.000.000/0001-00 · Dados fictícios para demonstração</span>
+      <span class="pay"><span>VISA</span><span>MASTER</span><span>PIX</span><span>AMEX</span></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= MODAIS ================= -->
+<div class="modal-overlay" id="modal-login">
+  <div class="modal">
+    <button class="modal-close" data-close>✕</button>
+    <h3>Bem-vindo de volta ✈</h3>
+    <p class="m-sub">Acesse para ver milhas, viagens e check-in rápido.</p>
+    <form id="loginForm" novalidate>
+      <div class="field"><label for="loginEmail">E-mail</label><input id="loginEmail" type="email" placeholder="voce@email.com" style="width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 16px"></div>
+      <div class="field"><label for="loginPass">Senha</label><input id="loginPass" type="password" placeholder="••••••••" style="width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 16px"></div>
+      <button class="btn btn-primary btn-block" type="submit">Entrar na minha conta</button>
+      <p style="text-align:center;font-size:.84rem;color:var(--muted);margin-top:14px">Ainda não é membro? <a href="#clube" data-close style="color:var(--blue);font-weight:700">Cadastre-se grátis</a></p>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-checkin">
+  <div class="modal">
+    <button class="modal-close" data-close>✕</button>
+    <h3>Check-in online</h3>
+    <p class="m-sub">Disponível de 72h até 1h antes do voo.</p>
+    <form id="checkinForm" novalidate>
+      <div class="field"><label>Código da reserva</label><input id="ciCode" placeholder="Ex.: ASK8X2" style="width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 16px;text-transform:uppercase"></div>
+      <div class="field"><label>Sobrenome</label><input id="ciName" placeholder="Como está no bilhete" style="width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 16px"></div>
+      <button class="btn btn-gold btn-block" type="submit">Fazer check-in</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-trips">
+  <div class="modal wide">
+    <button class="modal-close" data-close>✕</button>
+    <h3>Minhas viagens</h3>
+    <p class="m-sub">Gerencie reservas, remarque e baixe bilhetes. (Demonstração com dados fictícios)</p>
+    <div id="tripsList"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-help">
+  <div class="modal">
+    <button class="modal-close" data-close>✕</button>
+    <h3>Central de ajuda</h3>
+    <p class="m-sub">Como podemos ajudar?</p>
+    <div style="display:grid;gap:10px">
+      <a href="#" class="btn btn-ghost btn-block">🧳 Bagagem extraviada</a>
+      <a href="#" class="btn btn-ghost btn-block">🔄 Remarcar ou cancelar</a>
+      <a href="#" class="btn btn-ghost btn-block">💺 Escolher assento</a>
+      <a href="#" class="btn btn-ghost btn-block">💬 Falar no WhatsApp 24h</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-club">
+  <div class="modal">
+    <button class="modal-close" data-close>✕</button>
+    <h3>AeroSky Club ✦</h3>
+    <p class="m-sub">Cadastre-se grátis e ganhe <b>1.000 pontos de boas-vindas</b>.</p>
+    <form id="clubForm" novalidate>
+      <div class="field"><label>Nome completo</label><input id="clubName" placeholder="Como está no documento" style="width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 16px"></div>
+      <div class="field"><label>E-mail</label><input id="clubEmail" type="email" placeholder="voce@email.com" style="width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 16px"></div>
+      <button class="btn btn-gold btn-block" type="submit">Criar conta grátis</button>
+    </form>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

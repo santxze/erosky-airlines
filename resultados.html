@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resultados de voos — AeroSky Airlines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="header header-solid" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="brand"><span class="brand-mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M2.5 12.5 21 4l-6.5 17-3-6.5-9-2Zm9 2L9 19l1.5-4.5L21 4 11.5 14.5Z" fill="#E9CE8F"/></svg></span><span class="brand-name">AeroSky<small>AIRLINES</small></span></a>
+    <nav class="nav"><a href="index.html">Início</a><a href="index.html#ofertas" class="active">Passagens</a><a href="index.html#destinos">Destinos</a><a href="index.html#clube">Programa de fidelidade</a></nav>
+    <div class="header-actions"><a href="index.html#buscar" class="btn-buy">Nova busca</a></div>
+  </div>
+</header>
+
+<div class="results-hero">
+  <div class="container">
+    <span class="eyebrow gold"><span class="dot"></span> Resultados (demonstração)</span>
+    <h1 style="font-size:clamp(1.6rem,3.5vw,2.4rem)">Voos disponíveis ✈</h1>
+    <p id="resSummary" style="color:rgba(255,255,255,.75);margin-top:8px">Carregando…</p>
+  </div>
+</div>
+
+<section style="padding:44px 0 90px">
+  <div class="container">
+    <div style="display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap">
+      <span class="eyebrow">🎯 Menor preço</span><span class="eyebrow gold">⚡ Saída mais rápida</span><span class="eyebrow">💎 Mais conforto</span>
+    </div>
+    <div id="resultsList"></div>
+    <p style="color:var(--muted);font-size:.85rem;margin-top:18px">Valores e horários fictícios para demonstração. Próximas etapas previstas: <b>comprar.html</b> (checkout) → <b>checkin.html</b> → <b>perfil.html</b>.</p>
+    <a href="index.html" class="btn btn-ghost" style="margin-top:14px">← Voltar à página inicial</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container"><div class="footer-bottom"><span>© 2026 AeroSky Airlines · Demonstração</span><a href="index.html" style="color:var(--gold-light);font-weight:700">← Voltar</a></div></div>
+</footer>
+<div class="toast-wrap" id="toastWrap"></div>
+<script src="app.js"></script>
+</body>
+</html>
