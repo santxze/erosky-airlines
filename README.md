@@ -42,6 +42,15 @@ Ativação (obrigatória — sem isso o envio retorna erro claro):
 
 Limites: 3 envios / 10 min por e-mail; 5 tentativas por código.
 
+## Newsletter + Supabase (e-mail de ofertas automático)
+
+Quando alguém informa o e-mail em "Receba ofertas exclusivas", o site chama `POST /api/subscribe`, que salva em `newsletter_subscribers` e envia o e-mail **"🎉 Ofertas exclusivas de descontos"** (3 combos + cupom SKY10).
+
+1. Supabase → SQL Editor → rode o `supabase.sql` (cria a tabela).
+2. Vercel → Environment Variables → adicione `SUPABASE_URL` e `SUPABASE_SERVICE_KEY` (Project Settings → API).
+3. Provedor de envio: o mesmo da verificação (`GMAIL_*` ou `RESEND_API_KEY`).
+4. Redeploy.
+
 ## Acesso admin demo
 
 - URL: `admin.html` · usuário `admin@aerosky.com` · senha `sky123`

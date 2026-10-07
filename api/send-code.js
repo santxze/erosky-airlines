@@ -5,8 +5,7 @@
    Provedor: Resend (se RESEND_API_KEY) ou Gmail SMTP.
    ============================================================ */
 import crypto from "node:crypto";
-import nodemailer from "nodemailer";
-import { Resend } from "resend";
+import { sendMail } from "./_mail.js";
 
 const CODE_TTL_MS = 10 * 60 * 1000; // código válido por 10 min
 const sentAt = new Map(); // rate-limit simples por instância
@@ -26,28 +25,8 @@ function emailHtml(code) {
   </div></body></html>`;
 }
 
-async function sendMail(to, code) {
-  const subject = `Seu código AeroSky: ${code}`;
-  if (process.env.RESEND_API_KEY) {
-    const resend = new Resend(process.env.RESEND_API_KEY);
-    const { error } = await resend.emails.send({
-      from: process.env.RESEND_FROM || "AeroSky Airlines <onboarding@resend.dev>",
-      to,
-      subject,
-      html: emailHtml(code),
-    });
-    if (error) throw new Error(error.message);
-    return "resend";
-  }
-  if (process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD) {
-    const tx = nodemailer.createTransport({
-      service: "gmail",
-      auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_APP_PASSWORD },
-    });
-    await tx.sendMail({ from: `AeroSky Airlines <${process.env.GMAIL_USER}>`, to, subject, html: emailHtml(code) });
-    return "gmail";
-  }
-  throw new Error("NO_PROVIDER");
+async function sendCodeMail(to, code) {
+  return sendMail({ to, subject: `Seu código AeroSky: ${code}`, html: emailHtml(code) });
 }
 
 export default async function handler(req, res) {
@@ -68,7 +47,7 @@ export default async function handler(req, res) {
   const code = String(Math.floor(100000 + Math.random() * 900000));
   const exp = now + CODE_TTL_MS;
   try {
-    await sendMail(email, code);
+    await sendCodeMail(email, code);
   } catch (e) {
     if (e.message === "NO_PROVIDER")
       return res.status(500).json({ error: "Provedor de e-mail não configurado (GMAIL_* ou RESEND_API_KEY)." });

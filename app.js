@@ -238,12 +238,28 @@
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)) return toast("Informe um e-mail válido.", "error");
     closeModals(); toast(`Conta criada! <b>1.000 pontos</b> de boas-vindas.`, "success");
   });
-  $("#newsForm")?.addEventListener("submit", (e) => {
+  $("#newsForm")?.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const em = $("#newsEmail").value.trim();
+    const input = $("#newsEmail");
+    const em = input.value.trim().toLowerCase();
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)) return toast("Informe um e-mail válido para receber as ofertas.", "error");
-    $("#newsEmail").value = "";
-    toast("Inscrição confirmada! Ofertas a caminho ✈", "success");
+    const btn = e.target.querySelector("button[type=submit]");
+    const old = btn.textContent; btn.disabled = true; btn.textContent = "Enviando…";
+    try {
+      const r = await fetch("/api/subscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: em }) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(j.error || "Falha na inscrição.");
+      input.value = "";
+      toast(`Inscrição confirmada! Ofertas exclusivas a caminho de <b>${em}</b> ✈${j.saved ? "" : " <small>(lista local)</small>"}`, "success");
+    } catch (err) {
+      // fallback offline: salva localmente
+      const list = JSON.parse(localStorage.getItem("aerosky_newsletter") || "[]");
+      if (!list.includes(em)) { list.push(em); localStorage.setItem("aerosky_newsletter", JSON.stringify(list)); }
+      input.value = "";
+      toast(`Inscrição salva! ${err.message.includes("Provedor") ? "Envio de e-mail será ativado em breve." : "Ofertas a caminho ✈"}`, err.message.includes("Provedor") ? "info" : "success");
+    } finally {
+      btn.disabled = false; btn.textContent = old;
+    }
   });
 
   /* ---------- Reveal on scroll + contadores ---------- */
