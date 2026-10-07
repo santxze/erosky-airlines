@@ -20,6 +20,13 @@
 
   const BRL = (v) => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
 
+  /* Respeita prefers-reduced-motion: não reproduz o vídeo do hero (mostra apenas o poster) */
+  const heroVideo = document.querySelector(".hero-bg video");
+  if (heroVideo && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    heroVideo.removeAttribute("autoplay");
+    heroVideo.pause();
+  }
+
   /* ---------- Header scroll + mobile ---------- */
   const header = $("#header");
   const onScroll = () => {
@@ -271,8 +278,14 @@
         <div class="flight-line"><span>${dur}</span><div class="bar"></div><span>${i % 2 ? "Conexão GIG" : "Voo direto"}</span></div>
         <div class="t"><strong>${String((+h.slice(0, 2) + 8) % 24).padStart(2, "0")}:${h.slice(3)}</strong><small>${destino.split(" ")[0].toUpperCase()}</small></div></div></div>
         <div class="flight-price"><div><small>Ida e volta desde</small><strong>${BRL(price)}</strong><small>em até 10x · ${Math.floor(price / 12)} pts Club</small></div>
-        <button class="btn btn-gold" style="margin-top:10px" data-buy="${h}">Selecionar</button></div></div>`;
+        <button class="btn btn-gold" style="margin-top:10px" data-buy="${h}" data-price="${price}" data-voo="ASK 84${i}2">Selecionar</button></div></div>`;
     }).join("");
-    $$("[data-buy]", resWrap).forEach(b => b.addEventListener("click", () => toast(`Voo das <b>${b.dataset.buy}</b> reservado! Checkout em breve (próxima etapa).`, "success")));
+    $$("[data-buy]", resWrap).forEach(b => b.addEventListener("click", () => {
+      const q2 = new URLSearchParams(location.search);
+      q2.set("hora", b.dataset.buy);
+      q2.set("preco", b.dataset.price);
+      q2.set("voo", b.dataset.voo);
+      location.href = "checkout.html?" + q2.toString();
+    }));
   }
 })();

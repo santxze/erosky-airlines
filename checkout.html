@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — AeroSky Airlines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230A1C3D'/><text x='50' y='66' font-size='48' text-anchor='middle' fill='%23C9A24B'>✈</text></svg>">
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header header-solid" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="brand"><span class="brand-mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M2.5 12.5 21 4l-6.5 17-3-6.5-9-2Zm9 2L9 19l1.5-4.5L21 4 11.5 14.5Z" fill="#E9CE8F"/></svg></span><span class="brand-name">AeroSky<small>AIRLINES</small></span></a>
+    <nav class="nav"><a href="index.html">Início</a><a href="vendas.html">Ofertas</a><a href="resultados.html">Voos</a><a href="checkout.html" class="active">Checkout</a><a href="admin.html">Admin</a></nav>
+    <div class="header-actions"><a href="index.html#buscar" class="btn-buy">Nova busca</a></div>
+  </div>
+</header>
+
+<div class="checkout-hero">
+  <div class="container">
+    <span class="eyebrow gold"><span class="dot"></span> Compra segura · Sem taxas ocultas</span>
+    <h1 style="font-size:clamp(1.6rem,3.5vw,2.4rem)">Finalizar compra ✈</h1>
+    <p id="ckRoute" style="color:rgba(255,255,255,.75);margin-top:8px">Carregando voo…</p>
+    <div class="steps" id="stepsBar">
+      <span class="step active" data-s="1"><span class="n">1</span> Tarifa</span>
+      <span class="step" data-s="2"><span class="n">2</span> Passageiros e assentos</span>
+      <span class="step" data-s="3"><span class="n">3</span> Extras</span>
+      <span class="step" data-s="4"><span class="n">4</span> Pagamento</span>
+    </div>
+  </div>
+</div>
+
+<section style="padding:40px 0 90px">
+  <div class="container checkout-grid">
+    <div>
+      <!-- ETAPA 1 -->
+      <div class="panel" data-panel="1">
+        <h3>1 · Escolha sua tarifa</h3>
+        <p class="p-sub">Todas incluem Wi-Fi e entretenimento. A diferença está na flexibilidade.</p>
+        <div class="fare-grid" id="fareGrid"></div>
+      </div>
+
+      <!-- ETAPA 2 -->
+      <div class="panel" data-panel="2" hidden>
+        <h3>2 · Quem vai viajar?</h3>
+        <p class="p-sub">Use os nomes exatamente como estão no documento.</p>
+        <div id="paxForms" style="display:grid;gap:14px"></div>
+        <h3 style="margin-top:24px">Escolha os assentos <span style="font-size:.8rem;color:var(--gold-dark);background:#FBF3DE;padding:4px 10px;border-radius:100px" id="seatCount"></span></h3>
+        <p class="p-sub">Mapa do Airbus A350 · Saída de emergência com espaço extra.</p>
+        <div class="seat-map">
+          <div class="seat-legend"><span><i style="background:#2E9BFF"></i>Livre</span><span><i style="background:#C9A24B"></i>Selecionado</span><span><i style="background:rgba(255,255,255,.15)"></i>Ocupado</span><span>✈ Frente do avião ↑</span></div>
+          <div class="seats" id="seatMap"></div>
+        </div>
+      </div>
+
+      <!-- ETAPA 3 -->
+      <div class="panel" data-panel="3" hidden>
+        <h3>3 · Turbine sua viagem</h3>
+        <p class="p-sub">Adicionais por passageiro — dá para remover depois.</p>
+        <div id="extrasList"></div>
+      </div>
+
+      <!-- ETAPA 4 -->
+      <div class="panel" data-panel="4" hidden>
+        <h3>4 · Pagamento</h3>
+        <p class="p-sub">Ambiente demonstrativo — nenhum valor é cobrado de verdade.</p>
+        <div class="pay-tabs"><button type="button" class="pay-tab sel" data-pay="card">💳 Cartão</button><button type="button" class="pay-tab" data-pay="pix">⚡ Pix</button></div>
+        <div id="payCard">
+          <div class="form-grid">
+            <div class="full"><label class="lbl">Número do cartão</label><input class="inp" id="ccNum" inputmode="numeric" placeholder="0000 0000 0000 0000" maxlength="19"></div>
+            <div class="full"><label class="lbl">Nome impresso</label><input class="inp" id="ccName" placeholder="Como está no cartão"></div>
+            <div><label class="lbl">Validade</label><input class="inp" id="ccExp" placeholder="MM/AA" maxlength="5" inputmode="numeric"></div>
+            <div><label class="lbl">CVV</label><input class="inp" id="ccCvv" placeholder="123" maxlength="4" inputmode="numeric"></div>
+            <div class="full"><label class="lbl">Parcelas</label><select class="inp" id="ccParc"></select></div>
+          </div>
+        </div>
+        <div id="payPix" hidden style="text-align:center;padding:18px;border:1.5px dashed var(--line);border-radius:14px">
+          <div style="font-size:3rem">⚡</div>
+          <strong>Pix com 5% de desconto aplicado</strong>
+          <p style="color:var(--muted);font-size:.87rem">O QR Code será gerado após confirmar. Aprovação em segundos.</p>
+        </div>
+        <div class="form-grid" style="margin-top:14px">
+          <div><label class="lbl">E-mail do contato</label><input class="inp" id="ctEmail" type="email" placeholder="voce@email.com"></div>
+          <div><label class="lbl">Celular / WhatsApp</label><input class="inp" id="ctPhone" placeholder="(11) 99999-9999" inputmode="numeric"></div>
+        </div>
+        <label style="display:flex;gap:10px;align-items:flex-start;margin-top:14px;font-size:.85rem;color:var(--muted)"><input type="checkbox" id="acceptTerms" style="margin-top:4px"> Li e aceito os <b>&nbsp;termos de transporte, privacidade e remarcação&nbsp;</b> da AeroSky.</label>
+      </div>
+
+      <!-- SUCESSO -->
+      <div class="panel" data-panel="5" hidden>
+        <div class="success-box">
+          <div class="success-seal">✅</div>
+          <h3 style="font-size:1.5rem">Pagamento aprovado!</h3>
+          <p class="p-sub" style="margin:8px 0 0">Bilhetes enviados para o seu e-mail. Boa viagem! ✈</p>
+          <div class="locator" id="locatorCode">ASK000</div>
+          <p style="font-size:.87rem;color:var(--muted)" id="successDetail"></p>
+          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px">
+            <a href="index.html" class="btn btn-ghost">Voltar ao início</a>
+            <a href="admin.html" class="btn btn-primary">Ver no painel admin →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="wizard-nav">
+        <button class="btn btn-ghost" id="btnBack">← Voltar</button>
+        <button class="btn btn-gold btn-lg" id="btnNext">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- RESUMO -->
+    <aside class="summary-card" id="summaryCard">
+      <h4>Resumo do pedido</h4>
+      <div class="s-route" id="sumRoute">—</div>
+      <div id="sumLines"></div>
+      <div class="s-code"><input id="coupon" placeholder="Cupom (tente SKY10)"><button class="btn btn-light" id="btnCoupon" style="padding:11px 16px">OK</button></div>
+      <div class="secure">🔒 Compra protegida · Criptografia 256-bit · PCI-DSS</div>
+    </aside>
+  </div>
+</section>
+
+<footer>
+  <div class="container"><div class="footer-bottom"><span>© 2026 AeroSky Airlines · Checkout demonstrativo</span><span class="pay"><span>VISA</span><span>MASTER</span><span>PIX</span><span>AMEX</span></span></div></div>
+</footer>
+<div class="toast-wrap" id="toastWrap"></div>
+<script src="checkout.js"></script>
+</body>
+</html>

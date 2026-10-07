@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ofertas e Classes — AeroSky Airlines</title>
+<meta name="description" content="Ofertas relâmpago, comparativo de classes e combos Voo+Hotel. Viaje AeroSky.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230A1C3D'/><text x='50' y='66' font-size='48' text-anchor='middle' fill='%23C9A24B'>✈</text></svg>">
+</head>
+<body>
+
+<header class="header header-transparent" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="brand"><span class="brand-mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M2.5 12.5 21 4l-6.5 17-3-6.5-9-2Zm9 2L9 19l1.5-4.5L21 4 11.5 14.5Z" fill="#E9CE8F"/></svg></span><span class="brand-name">AeroSky<small>AIRLINES</small></span></a>
+    <nav class="nav"><a href="index.html">Início</a><a href="vendas.html" class="active">Ofertas</a><a href="index.html#destinos">Destinos</a><a href="index.html#clube">Clube</a><a href="admin.html">Admin</a></nav>
+    <div class="header-actions"><a href="checkout.html" class="btn-buy">Comprar agora</a><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu"><a href="index.html">Início</a><a href="vendas.html">Ofertas</a><a href="checkout.html">Comprar</a><a href="admin.html">Admin</a></div>
+
+<!-- HERO VENDAS -->
+<div class="sales-hero">
+  <div class="container" style="position:relative;z-index:1">
+    <span class="eyebrow gold"><span class="dot"></span> Sale relâmpago · até −35%</span>
+    <h1 style="font-size:clamp(2rem,5vw,3.6rem);max-width:700px">Voe mais, <span style="background:linear-gradient(100deg,#FFE9A8,#C9A24B);-webkit-background-clip:text;background-clip:text;color:transparent">pague menos.</span></h1>
+    <p style="color:rgba(255,255,255,.8);max-width:560px;margin-top:12px">Lisboa, Paris, Miami e +40 destinos com bagagem inclusa, remarcação flexível e milhas em dobro. A oferta termina em:</p>
+    <div class="countdown" id="countdown">
+      <div><strong id="cdH">12</strong><small>horas</small></div>
+      <div><strong id="cdM">00</strong><small>min</small></div>
+      <div><strong id="cdS">00</strong><small>seg</small></div>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a href="checkout.html?origem=São Paulo (GRU)&destino=Lisboa (LIS)&pax=1&classe=Econômica&preco=2499&hora=09:40&voo=ASK 8402" class="btn btn-gold btn-lg">Quero Lisboa por R$ 2.499 →</a>
+      <a href="#classes" class="btn btn-light btn-lg">Comparar classes</a>
+    </div>
+    <p style="font-size:.82rem;color:rgba(255,255,255,.6);margin-top:14px">🔒 7 dias de reembolso total · 4.9★ em 42 mil avaliações · Cupom <b style="color:var(--gold-light)">SKY10</b> no checkout</p>
+  </div>
+</div>
+
+<!-- CLASSES -->
+<section id="classes" style="padding:80px 0 40px">
+  <div class="container">
+    <div style="text-align:center;max-width:640px;margin:0 auto 40px">
+      <span class="eyebrow"><span class="dot"></span> Escolha como voar</span>
+      <h2 class="section-title">Uma classe para cada momento</h2>
+      <p class="section-sub" style="margin:0 auto">Preços de referência por pessoa em voos internacionais. Teste no checkout.</p>
+    </div>
+    <div class="class-grid" id="classGrid"></div>
+  </div>
+</section>
+
+<!-- COMBOS -->
+<section style="padding:40px 0">
+  <div class="container">
+    <div class="section-head"><div><span class="eyebrow gold"><span class="dot"></span> Voo + Hotel</span><h2 class="section-title">Combos com até 30% off</h2></div><a href="checkout.html" class="link-more">Montar meu combo →</a></div>
+    <div class="combo-grid" id="comboGrid"></div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section style="padding:40px 0;background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="container">
+    <div class="section-head"><div><span class="eyebrow"><span class="dot"></span> Quem voou, recomenda</span><h2 class="section-title">42 mil avaliações 4.9★</h2></div></div>
+    <div class="testi-track" id="testiTrack"></div>
+  </div>
+</section>
+
+<!-- GARANTIA + FAQ -->
+<section style="padding:70px 0">
+  <div class="container">
+    <div class="guarantee">
+      <div style="font-size:3.4rem">🛡️</div>
+      <div style="flex:1;min-width:240px"><h3 style="font-size:1.35rem">Garantia AeroSky de 7 dias</h3><p style="color:rgba(255,255,255,.7);font-size:.93rem">Comprou e se arrependeu? Reembolso total em até 7 dias, sem perguntas e sem multa. É o nosso compromisso por escrito.</p></div>
+      <a href="checkout.html" class="btn btn-gold btn-lg">Comprar sem risco →</a>
+    </div>
+    <div style="max-width:720px;margin:40px auto 0">
+      <h2 class="section-title" style="text-align:center;margin-bottom:24px">Perguntas frequentes</h2>
+      <div id="faqList"></div>
+    </div>
+    <div class="news-box" style="margin-top:44px">
+      <h2>Pronto para decolar <span>com 10% off?</span></h2>
+      <p>Use o cupom SKY10 no checkout. Válido para os 500 primeiros bilhetes de hoje.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1">
+        <a href="checkout.html" class="btn btn-gold btn-lg">Ir para o checkout →</a>
+        <a href="index.html#buscar" class="btn btn-light btn-lg">Buscar meu voo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container"><div class="footer-bottom"><span>© 2026 AeroSky Airlines · Página de vendas demonstrativa</span><a href="admin.html" style="color:var(--gold-light);font-weight:700">Área admin →</a></div></div>
+</footer>
+<div class="toast-wrap" id="toastWrap"></div>
+<script src="vendas.js"></script>
+</body>
+</html>

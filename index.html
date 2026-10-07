@@ -24,6 +24,7 @@
     </a>
     <nav class="nav" aria-label="Menu principal">
       <a href="#inicio" class="active">Início</a>
+      <a href="vendas.html">Ofertas</a>
       <a href="#ofertas">Passagens</a>
       <a href="#destinos">Destinos</a>
       <a href="#" data-modal="trips">Minhas viagens</a>
@@ -56,8 +57,12 @@
 
 <!-- ================= HERO + BUSCA ================= -->
 <section class="hero" id="inicio" style="padding-top:calc(var(--header-h) + 30px)">
-  <div class="hero-bg">
-    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=2000&q=80" alt="Avião AeroSky em voo" fetchpriority="high" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=2000&q=80'">
+  <div class="hero-bg" aria-hidden="true">
+    <video autoplay muted loop playsinline preload="metadata" disablepictureinpicture tabindex="-1" poster="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=2000&q=80">
+      <source src="/videos/aerosky-hero.mp4" type="video/mp4">
+      <source src="public/videos/aerosky-hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
   </div>
   <div class="hero-content">
     <div class="hero-badge"><span class="live"><i></i>AO VIVO</span> +120 destinos · Wi-Fi a bordo · Pontualidade 94%</div>
@@ -334,7 +339,7 @@
       <div><h4>Legal</h4><ul><li><a href="#">Política de privacidade</a></li><li><a href="#">Termos de uso</a></li><li><a href="#">Contrato de transporte</a></li><li><a href="#">LGPD</a></li></ul></div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 AeroSky Airlines · CNPJ 00.000.000/0001-00 · Dados fictícios para demonstração</span>
+      <span>© 2026 AeroSky Airlines · CNPJ 00.000.000/0001-00 · Dados fictícios para demonstração · <a href="admin.html" style="color:var(--gold-light);font-weight:700">Admin</a></span>
       <span class="pay"><span>VISA</span><span>MASTER</span><span>PIX</span><span>AMEX</span></span>
     </div>
   </div>

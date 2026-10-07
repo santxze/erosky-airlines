@@ -7,11 +7,23 @@ Site institucional + e-commerce fictício premium para a companhia aérea **Aero
 ```
 /
 ├── index.html          → Página inicial completa
-├── resultados.html     → Página de resultados de voos (lê ?origem&destino&ida&volta&pax&classe)
-├── styles.css          → Design system completo (variáveis, componentes, responsivo)
-├── app.js              → Lógica: menu, busca, ofertas, animações, modais, validações
+├── resultados.html     → Resultados (leva ao checkout via ?hora&preco&voo)
+├── checkout.html/js    → Checkout em 4 etapas + confirmação (salva em localStorage)
+├── vendas.html/js      → Página de vendas (sale, classes, combos, FAQ)
+├── admin.html/js       → Painel admin (login demo, KPIs, reservas, voos, relatórios, CSV)
+├── styles.css          → Design system completo (inclui checkout/vendas/admin)
+├── app.js              → Lógica: menu, busca, ofertas, animações, modais
 └── README.md
 ```
+
+## Fluxo de compra (demo, sem backend)
+
+`index.html` → busca → `resultados.html` → **Selecionar** → `checkout.html` (tarifa → passageiros/assentos → extras → pagamento) → reserva salva em `localStorage.aerosky_bookings` → visível em `admin.html`.
+
+## Acesso admin demo
+
+- URL: `admin.html` · usuário `admin@aerosky.com` · senha `sky123`
+- Reservas do checkout aparecem em tempo real; dá para confirmar/cancelar/excluir, cadastrar voos e exportar CSV.
 
 ## Como rodar
 
