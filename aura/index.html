@@ -52,26 +52,21 @@
 <!-- ================= HERO ================= -->
 <section class="hero" aria-label="Apresentação">
   <div class="hero-grid">
-    <div>
+    <div class="hero-copy">
       <span class="hero-badge"><span class="stars">★★★★★</span> Excelência em atendimento</span>
       <h1>Seu sorriso merece uma <em>nova experiência.</em></h1>
       <p class="sub">Odontologia de alta precisão, tecnologia e cuidado em cada detalhe.</p>
       <div class="hero-ctas">
-        <a href="#contato" class="btn btn-dark" data-magnetic>Agendar avaliação <span class="arr">→</span></a>
+        <a href="#contato" class="btn btn-dark" data-magnetic><span class="btn-label">Agendar avaliação</span> <span class="arr" aria-hidden="true">→</span></a>
         <a href="#tratamentos" class="btn btn-outline" data-magnetic>Conhecer tratamentos</a>
       </div>
       <div class="hero-proof">
         <div class="avatars">
-          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&q=70" alt="Paciente">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=70" alt="Paciente">
-          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&q=70" alt="Paciente">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&q=70" alt="Paciente da clínica">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=70" alt="Paciente da clínica">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&q=70" alt="Paciente da clínica">
         </div>
-        <span><strong>Planejamento digital • Atendimento personalizado</strong><br>Conteúdo demonstrativo · editável em siteConfig.js</span>
-      </div>
-      <div class="hero-meta">
-        <div><strong>10+ anos</strong><small>Excelência clínica</small></div>
-        <div><strong>98%</strong><small>Pacientes satisfeitos</small></div>
-        <div><strong>5.0 ★</strong><small>Avaliação média</small></div>
+        <span><strong>Planejamento digital • Atendimento personalizado</strong></span>
       </div>
     </div>
     <div class="stage" id="stage">
@@ -103,7 +98,7 @@
 <!-- ================= NÚMEROS ================= -->
 <section class="stats" aria-label="Indicadores">
   <div class="container">
-    <p class="eyebrow" style="justify-content:center;display:flex">Nossa experiência</p>
+    <p class="eyebrow" id="statsEyebrow" style="justify-content:center;display:flex"><span class="dot"></span> Por que a Aura</p>
     <div class="stats-grid" id="statsGrid">
       <!-- Estatísticas renderizadas via SITE_CONFIG.stats (app.js). -->
     </div>
@@ -162,12 +157,11 @@
       <h2 class="section-title">Resultados que você pode perceber.</h2>
       <p class="section-sub" style="margin:0 auto">Arraste o controle para comparar. Tecnologia encontra cuidado.</p></div>
     <div class="ba reveal" id="baSlider" role="slider" aria-label="Comparador antes e depois" aria-valuemin="4" aria-valuemax="96" aria-valuenow="50" tabindex="0">
-      <img id="baBefore" src="" alt="Imagem demonstrativa — antes">
-      <div class="after" id="baAfter"><img id="baAfterImg" src="" alt="Imagem demonstrativa — depois"></div>
+      <img id="baBefore" src="" alt="Sorriso antes do tratamento">
+      <div class="after" id="baAfter"><img id="baAfterImg" src="" alt="Sorriso depois do tratamento"></div>
       <div class="ba-handle" id="baHandle"><span>↔</span></div>
       <div class="ba-tags"><b>ANTES</b><b>DEPOIS</b></div>
     </div>
-    <p class="demo-note" id="baNote">Imagens demonstrativas (placeholders) — substitua por casos reais autorizados.</p>
   </div>
 </section>
 
@@ -175,8 +169,7 @@
 <section id="especialistas" style="background:var(--off)">
   <div class="container">
     <div class="reveal"><span class="eyebrow"><span class="dot"></span> Equipe</span>
-      <h2 class="section-title">Especialistas em cada detalhe.</h2>
-      <p class="section-sub">Equipe demonstrativa — substitua pelos profissionais reais da clínica.</p></div>
+      <h2 class="section-title">Especialistas em cada detalhe.</h2></div>
     <div class="docs" id="teamGrid"><!-- Especialistas via SITE_CONFIG.specialists (app.js). --></div>
   </div>
 </section>
@@ -209,10 +202,10 @@
 <!-- ================= DEPOIMENTOS ================= -->
 <section id="depoimentos" style="background:var(--off)">
   <div class="container">
-    <div class="center reveal"><span class="eyebrow"><span class="dot"></span> Depoimentos</span>
-      <h2 class="section-title">Experiências que deixam marcas positivas.</h2></div>
-    <div class="testis" id="testiGrid"><!-- Depoimentos via SITE_CONFIG.testimonials (app.js). --></div>
-    <p class="demo-note">Depoimentos demonstrativos — substitua em <code>siteConfig.js</code> por relatos reais autorizados.</p>
+    <div class="center reveal"><span class="eyebrow"><span class="dot"></span> Cuidado</span>
+      <h2 class="section-title" id="pillarsTitle">Uma experiência construída ao redor do paciente.</h2>
+      <p class="section-sub" id="pillarsSub" style="margin:0 auto">Histórias reais de pacientes aparecerão aqui.</p></div>
+    <div class="testis" id="testiGrid"><!-- Pilares ou depoimentos via siteConfig (app.js). --></div>
   </div>
 </section>
 
@@ -252,7 +245,7 @@
     <div class="contact-grid">
       <form class="form reveal" id="leadForm" novalidate>
         <label for="fNome">Nome</label><input id="fNome" name="nome" placeholder="Seu nome completo" autocomplete="name"><div class="ferr" id="e-nome">Informe seu nome.</div>
-        <label for="fTel">Telefone / WhatsApp</label><input id="fTel" name="telefone" placeholder="(21) 99999-9999" inputmode="tel" autocomplete="tel"><div class="ferr" id="e-tel">Informe um telefone válido.</div>
+        <label for="fTel">Telefone / WhatsApp</label><input id="fTel" name="telefone" placeholder="(00) 90000-0000" inputmode="tel" autocomplete="tel"><div class="ferr" id="e-tel">Informe um telefone válido.</div>
         <label for="fEmail">E-mail</label><input id="fEmail" name="email" type="email" placeholder="voce@email.com" autocomplete="email"><div class="ferr" id="e-email">Informe um e-mail válido.</div>
         <label for="fTrat">Tratamento de interesse</label>
         <select id="fTrat" name="tratamento"><!-- Opções via SITE_CONFIG.treatments (app.js). --></select>
@@ -262,10 +255,10 @@
         <div class="form-status" id="formStatus" role="status"></div>
       </form>
       <div class="reveal reveal-d1">
-        <div class="info-card"><b>Endereço</b><p id="infoAddress">Av. Atlântica, 1500 — Copacabana, Rio de Janeiro · RJ</p></div>
-        <div class="info-card"><b>Horários</b><p id="infoHours">Seg–Sex · 8h às 20h<br>Sáb · 8h às 13h</p></div>
-        <div class="info-card"><b>Contato direto</b><p id="infoDirect">(21) 3000-0000 · contato@auraodontologia.com.br<br><a href="#" id="infoWhats" style="color:var(--petrol);font-weight:800">Chamar no WhatsApp →</a></p></div>
-        <div class="info-card"><b>Como chegar</b><p><a id="infoMaps" href="https://maps.google.com/?q=Av.+Atlântica,+1500,+Copacabana,+Rio+de+Janeiro" target="_blank" rel="noopener" style="color:var(--petrol);font-weight:800">Abrir no Google Maps →</a></p></div>
+        <div class="info-card"><b>Endereço</b><p id="infoAddress">Rio de Janeiro — RJ</p></div>
+        <div class="info-card"><b>Horários</b><p id="infoHours"></p></div>
+        <div class="info-card"><b>Contato direto</b><p id="infoDirect"><a href="#" id="infoWhats" style="color:var(--petrol);font-weight:800">Chamar no WhatsApp →</a></p></div>
+        <div class="info-card" id="mapsCard"><b>Como chegar</b><p><a id="infoMaps" href="#" target="_blank" rel="noopener" style="color:var(--petrol);font-weight:800">Abrir no Google Maps →</a></p></div>
       </div>
     </div>
   </div>
@@ -289,9 +282,9 @@
         <p style="margin-top:16px;font-size:.92rem;max-width:300px">Odontologia criada ao redor de você. Tecnologia, estética e cuidado em cada detalhe.</p></div>
       <div><h4>Tratamentos</h4><ul id="footTreats"><li><a href="#tratamentos">Implantes</a></li><li><a href="#tratamentos">Facetas de Porcelana</a></li><li><a href="#tratamentos">Alinhadores</a></li><li><a href="#tratamentos">Clareamento</a></li></ul></div>
       <div><h4>Navegação</h4><ul><li><a href="#experiencia">Experiência</a></li><li><a href="#tecnologia">Tecnologia</a></li><li><a href="#especialistas">Especialistas</a></li><li><a href="#faq">FAQ</a></li></ul></div>
-      <div><h4>Contato</h4><ul><li id="footAddress">Av. Atlântica, 1500 — Copacabana, RJ</li><li id="footHours">Seg–Sex 8h–20h · Sáb 8h–13h</li><li><a href="#" id="footWhats">(21) 99999-9999 · WhatsApp</a></li><li><a id="footInstagram" href="https://instagram.com/aura.odontologia" target="_blank" rel="noopener">Instagram</a></li></ul></div>
+      <div><h4>Contato</h4><ul><li id="footAddress">Rio de Janeiro — RJ</li><li id="footHours"></li><li><a href="#" id="footWhats">WhatsApp</a></li><li><a id="footInstagram" href="#" target="_blank" rel="noopener">Instagram</a></li></ul></div>
     </div>
-    <div class="foot-bottom"><span>© 2026 Aura Odontologia · CRO-RJ 00000 · Conteúdo demonstrativo</span><span><a href="#">Política de privacidade</a> · Desenvolvido com excelência.</span></div>
+    <div class="foot-bottom"><span>© 2026 Aura Odontologia · Projeto conceitual para demonstração.</span><span><a href="#">Política de privacidade</a></span></div>
   </div>
 </footer>
 

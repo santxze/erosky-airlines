@@ -134,23 +134,31 @@
     }
   });
 
-  /* ---------- Contato direto / endereço / horários (siteConfig) ---------- */
+  /* ---------- Contato direto / endereço / horários (siteConfig) ----------
+     Demo: localização genérica, sem endereço fictício; card "Como chegar"
+     oculto até existir endereço real. */
   (function hydrateContact() {
     const set = (id, html) => {
       const el = document.getElementById(id);
       if (el && html) el.innerHTML = html;
     };
+    const isDemo = cfg.isDemo !== false;
     if (contact.phone && contact.email) {
       set(
         "infoDirect",
         `${contact.phone} · ${contact.email}<br><a href="${waLink()}" target="_blank" rel="noopener" style="color:var(--petrol);font-weight:800">Chamar no WhatsApp →</a>`
       );
     }
-    if (cfg.address) {
+    if (isDemo) {
+      set("infoAddress", "Rio de Janeiro — RJ<br><small>Localização demonstrativa</small>");
+      set("footAddress", "Rio de Janeiro — RJ");
+      const mapsCard = $("#mapsCard");
+      if (mapsCard) mapsCard.style.display = "none";
+    } else if (cfg.address) {
       set("infoAddress", `${cfg.address.street}, ${cfg.address.city} · ${cfg.address.state}`);
       set("footAddress", `${cfg.address.street} — ${cfg.address.city}, ${cfg.address.state}`);
     }
-    if (contact.mapsUrl) {
+    if (!isDemo && contact.mapsUrl) {
       const m = $("#infoMaps");
       if (m) m.href = contact.mapsUrl;
     }
@@ -163,9 +171,7 @@
     const ig = $("#footInstagram");
     if (ig && contact.instagram) {
       ig.href = contact.instagram;
-      ig.textContent = clinic.shortName
-        ? `Instagram ${contact.instagramLabel || ""}`.trim()
-        : "Instagram";
+      ig.textContent = contact.instagramLabel || "Instagram";
     }
   })();
 
@@ -189,9 +195,38 @@
       if (p < 1) requestAnimationFrame(tick);
     })(t0);
   }
+  /* ---------- Diferenciais (demo) ou estatísticas reais ---------- */
+  const DIFF_ICONS = {
+    plan: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="13" rx="3"/><path d="M8 21h8m-4-4v4M7 9l2.5 2.5L7 14m4-5h6"/></svg>',
+    tooth:
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5.5C10.5 3.8 8.4 3 6.6 3.6 4.3 4.4 3.4 7 4.3 9.6c.7 2 1.6 3.2 2.1 5.3.4 1.7.6 5.6 2.1 5.6 1.4 0 .9-3.9 3.5-3.9s2.1 3.9 3.5 3.9c1.5 0 1.7-3.9 2.1-5.6.5-2.1 1.4-3.3 2.1-5.3.9-2.6 0-5.2-2.3-6C15.6 3 13.5 3.8 12 5.5Z"/></svg>',
+    care: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7.5-4.7-9.5-9C1 8.9 2.7 5.5 6 5.5c2 0 3.6 1.1 4.4 2.7l1.6 2.4 1.6-2.4C14.4 6.6 16 5.5 18 5.5c3.3 0 5 3.4 3.5 6.5-2 4.3-9.5 9-9.5 9Z"/></svg>',
+  };
   (function renderStats() {
     const grid = $("#statsGrid");
-    if (!grid || !Array.isArray(cfg.stats)) return;
+    if (!grid) return;
+    const isDemo = cfg.isDemo !== false;
+    // Título da faixa acompanha o modo.
+    const eyebrow = $("#statsEyebrow");
+    if (eyebrow) {
+      eyebrow.innerHTML = isDemo
+        ? '<span class="dot"></span> Por que a Aura'
+        : '<span class="dot"></span> Nossa experiência';
+    }
+    if (isDemo && Array.isArray(cfg.differentials)) {
+      grid.classList.add("diff-grid");
+      grid.innerHTML = cfg.differentials
+        .map(
+          (d, i) => `
+      <div class="diff reveal ${i === 1 ? "reveal-d1" : i === 2 ? "reveal-d2" : ""}">
+        <div class="diff-ic">${DIFF_ICONS[d.icon] || DIFF_ICONS.plan}</div>
+        <div><strong>${d.title}</strong><small>${d.text}</small></div>
+      </div>`
+        )
+        .join("");
+      return;
+    }
+    if (!Array.isArray(cfg.stats)) return;
     grid.innerHTML = cfg.stats
       .map(
         (s, i) => `
@@ -200,7 +235,6 @@
           s.decimals ? ` data-decimals="${s.decimals}"` : ""
         }>0</span></strong>
         <small>${s.label}</small>
-        ${s.demo ? '<span class="demo-tag">dado demonstrativo</span>' : ""}
       </div>`
       )
       .join("");
@@ -218,9 +252,9 @@
       }">
         <div class="media"><img src="${t.image}" alt="${t.name}" loading="lazy" onerror="this.onerror=null;this.src='${IMG_FALLBACK(
           "aura-t" + i
-        )}'"></div>
+        )}'"><span class="treat-num">${String(i + 1).padStart(2, "0")}</span></div>
         <div class="body"><h3>${t.name}</h3><p>${t.description}</p>
-        <a class="link" href="#contato" aria-label="Agendar avaliação para ${t.name}">Conhecer tratamento <span aria-hidden="true">→</span></a></div>
+        <a class="link" href="#contato" aria-label="Agendar avaliação para ${t.name}">Agendar avaliação <span class="link-arr" aria-hidden="true">→</span></a></div>
       </article>`
       )
       .join("");
@@ -239,28 +273,52 @@
     }
   })();
 
-  /* ---------- Especialistas (siteConfig) ---------- */
+  /* ---------- Especialistas (siteConfig; CRO só com dados reais) ---------- */
   (function renderTeam() {
     const wrap = $("#teamGrid");
     if (!wrap || !Array.isArray(cfg.specialists)) return;
     wrap.innerHTML = cfg.specialists
       .map(
-        (d, i) => `
+        (d, i) => {
+          const showCro = !d.demo && d.cro;
+          const meta = [showCro ? d.cro : "", d.instagram || ""].filter(Boolean).join(" · ");
+          return `
       <article class="doc reveal ${i === 1 ? "reveal-d1" : i === 2 ? "reveal-d2" : ""}">
-        <img src="${d.image}" alt="${d.name}" loading="lazy" onerror="this.onerror=null;this.src='${IMG_FALLBACK(
-          "doc" + (i + 1)
-        )}'">
+        <div class="doc-media"><img src="${d.image}" alt="${d.name} — ${d.role}" loading="lazy" onerror="this.onerror=null;this.src='${IMG_FALLBACK(
+            "doc" + (i + 1)
+          )}'"></div>
         <div class="body"><small>${d.role}</small><h3>${d.name}</h3><p>${d.description}</p>
-        <div class="cro">${d.cro}${d.demo ? " · demonstrativo" : ""}${d.instagram ? " · " + d.instagram : ""}</div></div>
-      </article>`
+        ${meta ? `<div class="cro">${meta}</div>` : ""}</div>
+      </article>`;
+        }
       )
       .join("");
   })();
 
-  /* ---------- Depoimentos (siteConfig) ---------- */
+  /* ---------- Depoimentos reais — ou pilares do paciente (demo) ---------- */
   (function renderTestis() {
     const wrap = $("#testiGrid");
-    if (!wrap || !Array.isArray(cfg.testimonials)) return;
+    if (!wrap) return;
+    const isDemo = cfg.isDemo !== false;
+    const title = $("#pillarsTitle");
+    const sub = $("#pillarsSub");
+    if (isDemo && cfg.patientPillars) {
+      if (title) title.textContent = cfg.patientPillars.title;
+      if (sub) sub.style.display = "none";
+      wrap.classList.add("pillars");
+      wrap.innerHTML = cfg.patientPillars.items
+        .map(
+          (p, i) => `
+      <div class="pillar reveal ${i === 1 ? "reveal-d1" : i === 2 ? "reveal-d2" : ""}">
+        <span class="pillar-num">0${i + 1}</span>
+        <h3>${p.title}</h3>
+        <p>${p.text}</p>
+      </div>`
+        )
+        .join("");
+      return;
+    }
+    if (!Array.isArray(cfg.testimonials)) return;
     const stars = (n) => "★★★★★".slice(0, n || 5);
     wrap.innerHTML = cfg.testimonials
       .map(
@@ -269,9 +327,7 @@
         <div class="who"><img src="${t.image}" alt="${t.name}" loading="lazy" onerror="this.onerror=null;this.src='${IMG_FALLBACK(
           "face" + (i + 1)
         )}'">
-        <div><b>${t.name}</b><br><span class="stars" aria-label="${t.rating} de 5 estrelas">${stars(t.rating)}</span>${
-          t.demo ? ' <span class="demo-tag">demonstrativo</span>' : ""
-        }</div></div>
+        <div><b>${t.name}</b><br><span class="stars" aria-label="${t.rating} de 5 estrelas">${stars(t.rating)}</span></div></div>
         <p>"${t.text}"</p>
       </div>`
       )
@@ -302,8 +358,6 @@
         aImg.src = ba.after.src;
         aImg.alt = ba.after.alt;
       }
-      const note = $("#baNote");
-      if (note) note.textContent = ba.demoNote;
     }
   })();
 

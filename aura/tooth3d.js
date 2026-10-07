@@ -54,18 +54,18 @@ async function initWhenVisible() {
 /* ---------- Material porcelana premium ---------- */
 function porcelainMaterial(THREE) {
   return new THREE.MeshPhysicalMaterial({
-    color: 0xf8fbfa,
-    roughness: 0.08,
+    color: 0xf9fcfa,
+    roughness: 0.06,
     metalness: 0.0,
-    transmission: 0.45,
-    thickness: 1.8,
+    transmission: 0.5,
+    thickness: 2.0,
     ior: 1.46,
     clearcoat: 1,
-    clearcoatRoughness: 0.08,
-    sheen: 0.5,
-    sheenColor: new THREE.Color(0xcde9e5),
-    specularIntensity: 1.1,
-    envMapIntensity: 1.15,
+    clearcoatRoughness: 0.06,
+    sheen: 0.4,
+    sheenColor: new THREE.Color(0xd8efec),
+    specularIntensity: 1.0,
+    envMapIntensity: 1.2,
   });
 }
 
@@ -186,7 +186,7 @@ function buildScene(THREE, cv, interactive) {
       renderer.outputColorSpace = THREE.SRGBColorSpace;
     }
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.05;
+    renderer.toneMappingExposure = 1.0;
   } catch {
     /* versão antiga — mantém padrão */
   }
@@ -196,18 +196,18 @@ function buildScene(THREE, cv, interactive) {
   const cam = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
   cam.position.set(0, 0.25, 6.4);
 
-  // Iluminação de estúdio: key + fill + rim + ambiente suave.
-  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
-  const key = new THREE.DirectionalLight(0xffffff, 2.0);
+  // Iluminação cinematográfica de estúdio: key suave + fill + rim + topo.
+  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+  const key = new THREE.DirectionalLight(0xfff6ec, 1.8);
   key.position.set(3.5, 4.5, 5);
   scene.add(key);
-  const rim = new THREE.DirectionalLight(0x9fd8d2, 1.4);
+  const rim = new THREE.DirectionalLight(0xa8dcd6, 1.6);
   rim.position.set(-4.5, 2, -3.5);
   scene.add(rim);
-  const fill = new THREE.PointLight(0xeafffb, 10, 25);
+  const fill = new THREE.PointLight(0xeafffb, 8, 25);
   fill.position.set(-1.5, -2.5, 3.5);
   scene.add(fill);
-  const top = new THREE.DirectionalLight(0xffffff, 0.5);
+  const top = new THREE.DirectionalLight(0xffffff, 0.45);
   top.position.set(0, 6, 1);
   scene.add(top);
 
@@ -328,16 +328,16 @@ function buildScene(THREE, cv, interactive) {
     ).observe(cv);
   }
 
-  const speed = isMobile ? 0.35 : 0.6;
+  const speed = isMobile ? 0.22 : 0.38;
   function frame() {
     api.raf = 0;
     if (!api.running || !api.inView || document.hidden) return;
     api.t += 0.008 * speed * 2;
     const tooth = api.tooth;
     if (tooth) {
-      tooth.rotation.y += 0.004 * speed * 2;
-      tooth.rotation.x += (api.my * 0.22 - tooth.rotation.x) * 0.04;
-      tooth.rotation.z += (api.mx * 0.1 - tooth.rotation.z) * 0.04;
+      tooth.rotation.y += 0.003 * speed * 2; // rotação quase imperceptível
+      tooth.rotation.x += (api.my * 0.12 - tooth.rotation.x) * 0.035;
+      tooth.rotation.z += (api.mx * 0.06 - tooth.rotation.z) * 0.035;
       const floatY = Math.sin(api.t) * 0.12 + (interactive ? scrollP * 0.6 : 0);
       tooth.position.y += (floatY - tooth.position.y) * 0.06;
     }

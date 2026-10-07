@@ -113,11 +113,52 @@ const SITE_CONFIG = {
       name: "Odontologia Preventiva",
       description: "Check-ups, profilaxia e cuidado contínuo do seu sorriso.",
       image:
-        "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=70",
+        "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=70",
     },
   ],
 
-  /* PLACEHOLDER — substituir por equipe real (foto autorizada + CRO real) */
+  /* Diferenciais (exibidos enquanto isDemo === true — sem números fictícios).
+     Quando isDemo === false, a seção exibe SITE_CONFIG.stats reais. */
+  differentials: [
+    {
+      icon: "plan",
+      title: "Planejamento digital",
+      text: "Diagnóstico e planejamento com tecnologia 3D.",
+    },
+    {
+      icon: "tooth",
+      title: "Tecnologia 3D",
+      text: "Precisão em cada etapa do tratamento.",
+    },
+    {
+      icon: "care",
+      title: "Atendimento personalizado",
+      text: "Tratamentos planejados individualmente.",
+    },
+  ],
+
+  /* Pilares exibidos no lugar de depoimentos enquanto isDemo === true.
+     Com depoimentos reais autorizados, defina isDemo:false e preencha
+     `testimonials` — a seção troca automaticamente. */
+  patientPillars: {
+    title: "Uma experiência construída ao redor do paciente",
+    items: [
+      {
+        title: "Escuta",
+        text: "Tempo real para entender o que você espera do seu sorriso.",
+      },
+      {
+        title: "Clareza",
+        text: "Diagnóstico transparente e plano apresentado antes de começar.",
+      },
+      {
+        title: "Acompanhamento",
+        text: "Cuidado contínuo em cada etapa — e depois do tratamento.",
+      },
+    ],
+  },
+  /* PLACEHOLDER — substituir por equipe real (foto autorizada + CRO real).
+     Enquanto demo:true, o CRO NÃO é exibido na interface. */
   specialists: [
     {
       name: "Dra. Marina Lemos",
