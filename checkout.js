@@ -166,6 +166,21 @@
   }
   renderSummary();
 
+  /* Verificação de e-mail por código (verify-email.js) */
+  function markCtVerified(em) {
+    if (em && $("#ctEmail").value.trim().toLowerCase() !== em.toLowerCase()) $("#ctEmail").value = em;
+    $("#ctVerified").hidden = false;
+  }
+  $("#btnVerifyEmail")?.addEventListener("click", () => {
+    if (!window.AeroSkyVerify) return toast("Módulo de verificação indisponível.", "error");
+    window.AeroSkyVerify.open($("#ctEmail").value.trim(), markCtVerified);
+  });
+  document.addEventListener("aerosky:verified", (e) => markCtVerified(e.detail.email));
+  try {
+    const v = JSON.parse(localStorage.getItem("aerosky_verified_email") || "null");
+    if (v?.email && $("#ctEmail") && !$("#ctEmail").value) { $("#ctEmail").value = v.email; $("#ctVerified").hidden = false; }
+  } catch { /* sem e-mail verificado salvo */ }
+
   $("#btnCoupon").addEventListener("click", () => {
     const c = $("#coupon").value.trim().toUpperCase();
     if (c === "SKY10") { state.coupon = 0.10; state.couponCode = c; toast("Cupom <b>SKY10</b>: 10% off aplicado!", "success"); }

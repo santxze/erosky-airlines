@@ -11,6 +11,11 @@ Site institucional + e-commerce fictício premium para a companhia aérea **Aero
 ├── checkout.html/js    → Checkout em 4 etapas + confirmação (salva em localStorage)
 ├── vendas.html/js      → Página de vendas (sale, classes, combos, FAQ)
 ├── admin.html/js       → Painel admin (login demo, KPIs, reservas, voos, relatórios, CSV)
+├── verify-email.js     → Widget de verificação por código (login + checkout)
+├── api/send-code.js    → Serverless: gera e envia o código de 6 dígitos
+├── api/verify-code.js  → Serverless: valida o código (HMAC, sem banco)
+├── package.json        → Deps das functions (nodemailer, resend)
+├── .env.example        → Variáveis necessárias
 ├── styles.css          → Design system completo (inclui checkout/vendas/admin)
 ├── app.js              → Lógica: menu, busca, ofertas, animações, modais
 └── README.md
@@ -19,6 +24,23 @@ Site institucional + e-commerce fictício premium para a companhia aérea **Aero
 ## Fluxo de compra (demo, sem backend)
 
 `index.html` → busca → `resultados.html` → **Selecionar** → `checkout.html` (tarifa → passageiros/assentos → extras → pagamento) → reserva salva em `localStorage.aerosky_bookings` → visível em `admin.html`.
+
+## Verificação de e-mail por código (Gmail e outros)
+
+Fluxo: usuário informa o e-mail (login → "Entrar com código por e-mail", ou checkout → "Verificar e-mail") → recebe código de 6 dígitos válido por 10 min → digita no site → e-mail marcado como verificado.
+
+APIs (Vercel Serverless, sem banco — token HMAC stateless):
+- `POST /api/send-code` `{email}` → envia o e-mail, devolve `{token}`
+- `POST /api/verify-code` `{email, code, token}` → `{ok:true}`
+
+Ativação (obrigatória — sem isso o envio retorna erro claro):
+1. Gmail: Conta Google → Segurança → Verificação em 2 etapas → **Senhas de app** → gere uma senha.
+2. Vercel → Project → Settings → Environment Variables → adicione:
+   `VERIFY_SECRET` (string aleatória longa), `GMAIL_USER`, `GMAIL_APP_PASSWORD`.
+   (Alternativa: `RESEND_API_KEY` + `RESEND_FROM` — tem prioridade se definida.)
+3. Redeploy para aplicar as variáveis.
+
+Limites: 3 envios / 10 min por e-mail; 5 tentativas por código.
 
 ## Acesso admin demo
 

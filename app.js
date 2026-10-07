@@ -57,6 +57,16 @@
   }
   function closeModals() { $$(".modal-overlay.open").forEach(m => m.classList.remove("open")); }
   $$("[data-modal]").forEach(b => b.addEventListener("click", (e) => { e.preventDefault(); openModal(b.dataset.modal); }));
+  /* Entrar com código por e-mail (verify-email.js) */
+  $$("[data-verify]").forEach(b => b.addEventListener("click", (e) => {
+    e.preventDefault(); closeModals();
+    if (!window.AeroSkyVerify) { toast("Módulo de verificação indisponível.", "error"); return; }
+    const pre = ($("#loginEmail")?.value || "").trim();
+    window.AeroSkyVerify.open(pre, (em) => {
+      const le = $("#loginEmail"); if (le) le.value = em;
+      toast(`Login verificado como <b>${em}</b>. Bem-vindo(a)! ✈`, "success");
+    });
+  }));
   $$("[data-close]").forEach(b => b.addEventListener("click", (e) => { e.preventDefault(); closeModals(); if (b.tagName === "A" && b.getAttribute("href")?.startsWith("#")) { const t = $(b.getAttribute("href")); t && t.scrollIntoView({ behavior: "smooth" }); } }));
   $$(".modal-overlay").forEach(o => o.addEventListener("click", (e) => { if (e.target === o) closeModals(); }));
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModals(); });

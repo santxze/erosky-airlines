@@ -1,0 +1,11 @@
+{
+  "name": "aerosky-airlines",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Site AeroSky Airlines + Serverless Functions de verificação de e-mail",
+  "dependencies": {
+    "nodemailer": "^6.9.14",
+    "resend": "^4.0.0"
+  }
+}

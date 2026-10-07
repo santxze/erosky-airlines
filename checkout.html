@@ -84,7 +84,8 @@
           <p style="color:var(--muted);font-size:.87rem">O QR Code será gerado após confirmar. Aprovação em segundos.</p>
         </div>
         <div class="form-grid" style="margin-top:14px">
-          <div><label class="lbl">E-mail do contato</label><input class="inp" id="ctEmail" type="email" placeholder="voce@email.com"></div>
+          <div><label class="lbl">E-mail do contato</label><input class="inp" id="ctEmail" type="email" placeholder="voce@email.com">
+            <div style="display:flex;align-items:center;gap:8px;margin-top:8px"><button type="button" id="btnVerifyEmail" class="btn btn-ghost" style="padding:9px 16px;font-size:.82rem">📩 Verificar e-mail</button><span id="ctVerified" class="verified-badge" hidden>✓ verificado</span></div></div>
           <div><label class="lbl">Celular / WhatsApp</label><input class="inp" id="ctPhone" placeholder="(11) 99999-9999" inputmode="numeric"></div>
         </div>
         <label style="display:flex;gap:10px;align-items:flex-start;margin-top:14px;font-size:.85rem;color:var(--muted)"><input type="checkbox" id="acceptTerms" style="margin-top:4px"> Li e aceito os <b>&nbsp;termos de transporte, privacidade e remarcação&nbsp;</b> da AeroSky.</label>
@@ -127,5 +128,6 @@
 </footer>
 <div class="toast-wrap" id="toastWrap"></div>
 <script src="checkout.js"></script>
+<script src="verify-email.js"></script>
 </body>
 </html>

@@ -358,6 +358,7 @@ footer ul a:hover{color:var(--gold-light)}
 .toast.error{border-color:#E5484D}
 @keyframes toastIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
 .toast.out{opacity:0;transform:translateX(30px);transition:.3s}
+.verified-badge{display:inline-flex;align-items:center;gap:6px;background:#E6F9EF;color:#0A7A3D;font-weight:800;font-size:.78rem;padding:6px 12px;border-radius:100px}
 
 /* Results page */
 .results-hero{background:linear-gradient(135deg,#071230,#12305F 60%,#1B4587);color:#fff;padding:calc(var(--header-h) + 40px) 0 40px}
