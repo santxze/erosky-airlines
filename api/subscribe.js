@@ -39,7 +39,7 @@ async function saveSubscriber(email) {
       apikey: key,
       Authorization: `Bearer ${key}`,
       "Content-Type": "application/json",
-      Prefer: "resolution=merge-duplicates",
+      Prefer: "resolution=ignore-duplicates",
     },
     body: JSON.stringify({ email }),
   });
