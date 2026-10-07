@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aura Odontologia | Tecnologia, Estética e Cuidado</title>
+<meta name="description" content="Odontologia moderna, estética dental, implantes, alinhadores e planejamento digital em uma experiência criada ao redor de você.">
+<link rel="canonical" href="https://auraodontologia.com.br/">
+<meta property="og:title" content="Aura Odontologia | Tecnologia, Estética e Cuidado">
+<meta property="og:description" content="Odontologia de alta precisão, tecnologia e cuidado em cada detalhe.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:image" content="https://auraodontologia.com.br/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Aura Odontologia | Tecnologia, Estética e Cuidado">
+<meta name="twitter:description" content="Odontologia moderna, estética dental, implantes, alinhadores e planejamento digital.">
+<meta name="theme-color" content="#0E3B3B">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='26' fill='%230E3B3B'/><text x='50' y='68' font-size='46' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>A</text></svg>">
+<!-- JSON-LD injetado via app.js a partir de SITE_CONFIG (respeita isDemo). -->
+</head>
+<body>
+<a href="#contato" class="skip-link">Pular para o contato</a>
+
+<div id="loader" aria-hidden="true"><div class="mark">AURA<small>ODONTOLOGIA</small></div><div class="bar"><i></i></div></div>
+<div class="cursor-dot" id="cDot" aria-hidden="true"></div><div class="cursor-ring" id="cRing" aria-hidden="true"></div>
+
+<header class="header header-transparent" id="header">
+  <div class="header-inner">
+    <a href="#inicio" class="brand" aria-label="Aura Odontologia"><span class="brand-mark">A</span><span>AURA<small>ODONTOLOGIA</small></span></a>
+    <nav class="nav" aria-label="Menu principal">
+      <a href="#inicio">Início</a><a href="#tratamentos">Tratamentos</a><a href="#tecnologia">Tecnologia</a>
+      <a href="#especialistas">Especialistas</a><a href="#clinica">Clínica</a><a href="#contato">Contato</a>
+    </nav>
+    <div class="header-actions">
+      <a href="#contato" class="btn btn-dark" style="padding:12px 24px;min-height:46px" data-magnetic>Agendar avaliação <span class="arr">→</span></a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#inicio">Início</a><a href="#tratamentos">Tratamentos</a><a href="#tecnologia">Tecnologia</a>
+  <a href="#especialistas">Especialistas</a><a href="#clinica">Clínica</a><a href="#contato">Contato</a>
+  <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;justify-content:center">
+    <a href="#contato" class="btn btn-dark">Agendar avaliação</a>
+  </div>
+</div>
+
+<main id="inicio">
+<!-- ================= HERO ================= -->
+<section class="hero" aria-label="Apresentação">
+  <div class="hero-grid">
+    <div>
+      <span class="hero-badge"><span class="stars">★★★★★</span> Excelência em atendimento</span>
+      <h1>Seu sorriso merece uma <em>nova experiência.</em></h1>
+      <p class="sub">Odontologia de alta precisão, tecnologia e cuidado em cada detalhe.</p>
+      <div class="hero-ctas">
+        <a href="#contato" class="btn btn-dark" data-magnetic>Agendar avaliação <span class="arr">→</span></a>
+        <a href="#tratamentos" class="btn btn-outline" data-magnetic>Conhecer tratamentos</a>
+      </div>
+      <div class="hero-proof">
+        <div class="avatars">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&q=70" alt="Paciente">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=70" alt="Paciente">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&q=70" alt="Paciente">
+        </div>
+        <span><strong>Planejamento digital • Atendimento personalizado</strong><br>Conteúdo demonstrativo · editável em siteConfig.js</span>
+      </div>
+      <div class="hero-meta">
+        <div><strong>10+ anos</strong><small>Excelência clínica</small></div>
+        <div><strong>98%</strong><small>Pacientes satisfeitos</small></div>
+        <div><strong>5.0 ★</strong><small>Avaliação média</small></div>
+      </div>
+    </div>
+    <div class="stage" id="stage">
+      <canvas id="toothCanvas" aria-label="Escultura digital de dente em 3D" role="img"></canvas>
+      <div class="tooth-fallback" aria-hidden="true">
+        <svg width="220" height="240" viewBox="0 0 200 220"><defs><linearGradient id="tg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#BFE0DB"/></linearGradient></defs><path d="M100 8C60 8 30 30 30 66c0 30 18 44 26 70 7 24 10 74 24 74 12 0 8-46 20-46s8 46 20 46c14 0 17-50 24-74 8-26 26-40 26-70 0-36-30-58-70-58Z" fill="url(#tg)" stroke="#0E3B3B" stroke-opacity=".2" stroke-width="2"/></svg>
+      </div>
+      <div class="stage-card sc1"><span style="font-size:1.3rem">◈</span><span><b>Planejamento digital</b><small>Precisão milimétrica</small></span></div>
+      <div class="stage-card sc2"><span style="font-size:1.3rem">✦</span><span><b>Cerâmica premium</b><small>Estética natural</small></span></div>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true">Explore<i></i></div>
+</section>
+
+<!-- ================= EXPERIÊNCIA AURA ================= -->
+<section id="experiencia">
+  <div class="container">
+    <div class="center reveal"><span class="eyebrow"><span class="dot"></span> Experiência Aura</span>
+      <h2 class="section-title">Uma nova forma de cuidar<br>do seu sorriso.</h2>
+      <p class="section-sub" style="margin:0 auto">Unimos tecnologia, precisão e atendimento humanizado para criar uma experiência odontológica completamente diferente.</p></div>
+    <div class="exp-grid">
+      <div class="exp-card reveal"><div class="exp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="13" rx="3"/><path d="M8 21h8m-4-4v4M7 9l2.5 2.5L7 14m4-5h6"/></svg></div><span class="exp-num">01</span><h3>Tecnologia</h3><p>Planejamento digital e equipamentos modernos para decisões mais precisas.</p></div>
+      <div class="exp-card reveal reveal-d1"><div class="exp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.5-9.5-9C.9 8.6 2.6 5 6 5c2 0 3.4 1.1 4.2 2.3h3.6C14.6 6.1 16 5 18 5c3.4 0 5.1 3.6 3.5 7-2.5 4.5-9.5 9-9.5 9Z" transform="scale(.92) translate(1,1)"/></svg></div><span class="exp-num">02</span><h3>Conforto</h3><p>Uma experiência pensada para transformar a forma como você se sente no consultório.</p></div>
+      <div class="exp-card reveal reveal-d2"><div class="exp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 15 8.5l7 .8-5.2 4.7 1.5 6.9L12 17.3 5.7 20.9l1.5-6.9L2 9.3l7-.8L12 2Z"/></svg></div><span class="exp-num">03</span><h3>Excelência</h3><p>Planejamento personalizado para resultados naturais e duradouros.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NÚMEROS ================= -->
+<section class="stats" aria-label="Indicadores">
+  <div class="container">
+    <p class="eyebrow" style="justify-content:center;display:flex">Nossa experiência</p>
+    <div class="stats-grid" id="statsGrid">
+      <!-- Estatísticas renderizadas via SITE_CONFIG.stats (app.js). -->
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRATAMENTOS ================= -->
+<section id="tratamentos">
+  <div class="container">
+    <div class="reveal"><span class="eyebrow"><span class="dot"></span> Tratamentos</span>
+      <h2 class="section-title">Precisão para cada sorriso.</h2>
+      <p class="section-sub">Tratamentos planejados individualmente para preservar naturalidade, função e estética.</p></div>
+    <div class="treat-grid" id="treatGrid"><!-- Tratamentos via SITE_CONFIG.treatments (app.js). --></div>
+    <div class="center" style="margin-top:36px"><a href="#contato" class="btn btn-dark reveal" data-magnetic>Agendar avaliação <span class="arr">→</span></a></div>
+  </div>
+</section>
+
+<!-- ================= PRECISÃO ================= -->
+<section class="precision" id="precisao">
+  <div class="container">
+    <div class="reveal"><span class="eyebrow" style="color:var(--ice)"><span class="dot" style="background:var(--ice)"></span> Design digital do sorriso</span>
+      <h2 class="section-title" style="color:#fff">Precisão em cada detalhe.</h2>
+      <p class="section-sub">Role e descubra como cada camada do tratamento é planejada digitalmente.</p></div>
+    <div class="precision-wrap">
+      <div class="precision-visual"><canvas id="toothCanvas2" aria-label="Detalhe 3D do dente" role="img"></canvas></div>
+      <div class="markers" id="markers">
+        <div class="marker"><span class="num">01 — PLANEJAMENTO</span><b>Planejamento</b><p>Escaneamento e simulação digital antes de qualquer intervenção — você visualiza o resultado.</p></div>
+        <div class="marker"><span class="num">02 — PRECISÃO</span><b>Precisão</b><p>Moldagem digital sem desconforto, com ajuste milimétrico e previsibilidade.</p></div>
+        <div class="marker"><span class="num">03 — NATURALIDADE</span><b>Naturalidade</b><p>Cerâmica, cor e textura planejadas para o seu rosto. Nada artificial.</p></div>
+        <div class="marker"><span class="num">04 — TECNOLOGIA</span><b>Tecnologia</b><p>Guia cirúrgico, impressão 3D e protocolos que unem segurança e conforto.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TECNOLOGIA ================= -->
+<section class="tech" id="tecnologia">
+  <div class="container">
+    <div class="reveal"><span class="eyebrow" style="color:var(--ice)"><span class="dot" style="background:var(--ice)"></span> Tecnologia</span>
+      <h2 class="section-title" style="color:#fff">Tratamentos planejados no detalhe.</h2>
+      <p class="section-sub">Um novo padrão de cuidado, do diagnóstico ao resultado.</p></div>
+    <div class="tech-grid">
+      <div class="tech-card reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h16v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8Zm0 0 2-4h12l2 4M9 12h6"/></svg><h3>Scanner Intraoral 3D</h3><p>Moldagem digital rápida, sem massa e sem desconforto.</p></div>
+      <div class="tech-card reveal reveal-d1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg><h3>Planejamento Digital</h3><p>Você visualiza o resultado antes de começar.</p></div>
+      <div class="tech-card reveal reveal-d2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/></svg><h3>Radiologia Digital</h3><p>Diagnóstico preciso com mínima exposição.</p></div>
+      <div class="tech-card reveal reveal-d1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6m0 0 3-3m-3 3L9 5m9 9a5 5 0 0 1-5 5H5v-5h8a5 5 0 0 0 5-5V5h2v4Z" transform="translate(-1,0)"/></svg><h3>Impressão 3D</h3><p>Guias e provisórios com ajuste perfeito.</p></div>
+      <div class="tech-card reveal reveal-d2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".5" fill="currentColor"/></svg><h3>Cirurgia Guiada</h3><p>Implantes com máxima segurança e previsibilidade.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ANTES / DEPOIS ================= -->
+<section id="resultados">
+  <div class="container">
+    <div class="center reveal"><span class="eyebrow"><span class="dot"></span> Resultados</span>
+      <h2 class="section-title">Resultados que você pode perceber.</h2>
+      <p class="section-sub" style="margin:0 auto">Arraste o controle para comparar. Tecnologia encontra cuidado.</p></div>
+    <div class="ba reveal" id="baSlider" role="slider" aria-label="Comparador antes e depois" aria-valuemin="4" aria-valuemax="96" aria-valuenow="50" tabindex="0">
+      <img id="baBefore" src="" alt="Imagem demonstrativa — antes">
+      <div class="after" id="baAfter"><img id="baAfterImg" src="" alt="Imagem demonstrativa — depois"></div>
+      <div class="ba-handle" id="baHandle"><span>↔</span></div>
+      <div class="ba-tags"><b>ANTES</b><b>DEPOIS</b></div>
+    </div>
+    <p class="demo-note" id="baNote">Imagens demonstrativas (placeholders) — substitua por casos reais autorizados.</p>
+  </div>
+</section>
+
+<!-- ================= ESPECIALISTAS ================= -->
+<section id="especialistas" style="background:var(--off)">
+  <div class="container">
+    <div class="reveal"><span class="eyebrow"><span class="dot"></span> Equipe</span>
+      <h2 class="section-title">Especialistas em cada detalhe.</h2>
+      <p class="section-sub">Equipe demonstrativa — substitua pelos profissionais reais da clínica.</p></div>
+    <div class="docs" id="teamGrid"><!-- Especialistas via SITE_CONFIG.specialists (app.js). --></div>
+  </div>
+</section>
+
+<!-- ================= SOBRE / CLÍNICA ================= -->
+<section id="clinica">
+  <div class="container about-grid">
+    <div class="about-imgs reveal">
+      <img class="main" src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80" alt="Interior da clínica Aura" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/aura-clinic/1000/900'">
+      <img class="float" src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80" alt="Detalhe arquitetônico" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/aura-detail/600/500'">
+    </div>
+    <div class="reveal reveal-d1">
+      <span class="eyebrow"><span class="dot"></span> A clínica</span>
+      <h2 class="section-title">Um espaço pensado para mudar sua percepção sobre ir ao dentista.</h2>
+      <p class="section-sub">Arquitetura calma, atendimento sem pressa e tecnologia em cada etapa — do primeiro olhar ao acompanhamento.</p>
+      <ul class="about-list">
+        <li><i>✓</i> Arquitetura e conforto premium</li>
+        <li><i>✓</i> Atendimento humanizado e pontual</li>
+        <li><i>✓</i> Biossegurança e protocolos rigorosos</li>
+        <li><i>✓</i> Planejamento digital transparente</li>
+      </ul>
+      <a href="#contato" class="btn btn-outline" data-magnetic>Conhecer a clínica</a>
+    </div>
+  </div>
+  <div class="container">
+    <div class="gal reveal" id="gallery"><!-- Galeria via SITE_CONFIG.gallery (app.js). --></div>
+  </div>
+</section>
+
+<!-- ================= DEPOIMENTOS ================= -->
+<section id="depoimentos" style="background:var(--off)">
+  <div class="container">
+    <div class="center reveal"><span class="eyebrow"><span class="dot"></span> Depoimentos</span>
+      <h2 class="section-title">Experiências que deixam marcas positivas.</h2></div>
+    <div class="testis" id="testiGrid"><!-- Depoimentos via SITE_CONFIG.testimonials (app.js). --></div>
+    <p class="demo-note">Depoimentos demonstrativos — substitua em <code>siteConfig.js</code> por relatos reais autorizados.</p>
+  </div>
+</section>
+
+<!-- ================= PROCESSO ================= -->
+<section class="process" id="processo">
+  <div class="container">
+    <div class="center reveal"><span class="eyebrow"><span class="dot"></span> Jornada</span>
+      <h2 class="section-title">Seu novo sorriso começa aqui.</h2></div>
+    <div class="steps">
+      <div class="step reveal"><span class="n">01</span><h3>Agendamento</h3><p>Escolha o canal ideal: site, WhatsApp ou telefone.</p></div>
+      <div class="step reveal reveal-d1"><span class="n">02</span><h3>Avaliação personalizada</h3><p>Escuta atenta, exames e diagnóstico completo.</p></div>
+      <div class="step reveal reveal-d1"><span class="n">03</span><h3>Planejamento digital</h3><p>Simulação do resultado e plano transparente.</p></div>
+      <div class="step reveal reveal-d2"><span class="n">04</span><h3>Tratamento</h3><p>Execução precisa, confortável e pontual.</p></div>
+      <div class="step reveal reveal-d2"><span class="n">05</span><h3>Acompanhamento</h3><p>Revisões programadas e cuidado contínuo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section style="padding:40px 0 104px;background:var(--off)">
+  <div class="cta reveal">
+    <h2>Seu sorriso pode começar a mudar hoje.</h2>
+    <p>Agende uma avaliação e conheça uma odontologia planejada ao redor de você.</p>
+    <div class="row">
+      <a href="#contato" class="btn btn-light" data-magnetic>Agendar avaliação <span class="arr">→</span></a>
+      <a href="#" class="btn btn-wa" id="ctaWhats" data-magnetic>Falar pelo WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTATO / FORM ================= -->
+<section id="contato" style="padding-top:0;background:var(--off)">
+  <div class="container">
+    <div class="reveal"><span class="eyebrow"><span class="dot"></span> Contato</span>
+      <h2 class="section-title">Solicite sua avaliação.</h2>
+      <p class="section-sub">Resposta rápida no horário comercial. Sem compromisso.</p></div>
+    <div class="contact-grid">
+      <form class="form reveal" id="leadForm" novalidate>
+        <label for="fNome">Nome</label><input id="fNome" name="nome" placeholder="Seu nome completo" autocomplete="name"><div class="ferr" id="e-nome">Informe seu nome.</div>
+        <label for="fTel">Telefone / WhatsApp</label><input id="fTel" name="telefone" placeholder="(21) 99999-9999" inputmode="tel" autocomplete="tel"><div class="ferr" id="e-tel">Informe um telefone válido.</div>
+        <label for="fEmail">E-mail</label><input id="fEmail" name="email" type="email" placeholder="voce@email.com" autocomplete="email"><div class="ferr" id="e-email">Informe um e-mail válido.</div>
+        <label for="fTrat">Tratamento de interesse</label>
+        <select id="fTrat" name="tratamento"><!-- Opções via SITE_CONFIG.treatments (app.js). --></select>
+        <label for="fMsg">Mensagem</label><textarea id="fMsg" name="mensagem" rows="4" placeholder="Conte um pouco sobre o seu caso (opcional)"></textarea>
+        <label class="check"><input type="checkbox" id="fWa" style="width:auto"> Prefiro atendimento pelo WhatsApp.</label>
+        <button type="submit" class="btn btn-dark" style="width:100%;margin-top:18px" data-magnetic>Solicitar avaliação <span class="arr">→</span></button>
+        <div class="form-status" id="formStatus" role="status"></div>
+      </form>
+      <div class="reveal reveal-d1">
+        <div class="info-card"><b>Endereço</b><p id="infoAddress">Av. Atlântica, 1500 — Copacabana, Rio de Janeiro · RJ</p></div>
+        <div class="info-card"><b>Horários</b><p id="infoHours">Seg–Sex · 8h às 20h<br>Sáb · 8h às 13h</p></div>
+        <div class="info-card"><b>Contato direto</b><p id="infoDirect">(21) 3000-0000 · contato@auraodontologia.com.br<br><a href="#" id="infoWhats" style="color:var(--petrol);font-weight:800">Chamar no WhatsApp →</a></p></div>
+        <div class="info-card"><b>Como chegar</b><p><a id="infoMaps" href="https://maps.google.com/?q=Av.+Atlântica,+1500,+Copacabana,+Rio+de+Janeiro" target="_blank" rel="noopener" style="color:var(--petrol);font-weight:800">Abrir no Google Maps →</a></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq">
+  <div class="container">
+    <div class="center reveal"><span class="eyebrow"><span class="dot"></span> Dúvidas</span>
+      <h2 class="section-title">Perguntas frequentes.</h2></div>
+    <div class="faq" id="faqList"><!-- FAQ via SITE_CONFIG.faq (app.js). --></div>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div><a href="#inicio" class="brand" style="color:#fff"><span class="brand-mark">A</span><span>AURA<small>ODONTOLOGIA</small></span></a>
+        <p style="margin-top:16px;font-size:.92rem;max-width:300px">Odontologia criada ao redor de você. Tecnologia, estética e cuidado em cada detalhe.</p></div>
+      <div><h4>Tratamentos</h4><ul id="footTreats"><li><a href="#tratamentos">Implantes</a></li><li><a href="#tratamentos">Facetas de Porcelana</a></li><li><a href="#tratamentos">Alinhadores</a></li><li><a href="#tratamentos">Clareamento</a></li></ul></div>
+      <div><h4>Navegação</h4><ul><li><a href="#experiencia">Experiência</a></li><li><a href="#tecnologia">Tecnologia</a></li><li><a href="#especialistas">Especialistas</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+      <div><h4>Contato</h4><ul><li id="footAddress">Av. Atlântica, 1500 — Copacabana, RJ</li><li id="footHours">Seg–Sex 8h–20h · Sáb 8h–13h</li><li><a href="#" id="footWhats">(21) 99999-9999 · WhatsApp</a></li><li><a id="footInstagram" href="https://instagram.com/aura.odontologia" target="_blank" rel="noopener">Instagram</a></li></ul></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 Aura Odontologia · CRO-RJ 00000 · Conteúdo demonstrativo</span><span><a href="#">Política de privacidade</a> · Desenvolvido com excelência.</span></div>
+  </div>
+</footer>
+
+<a href="#" class="wa-float" id="waFloat" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.5 14.1c-.2.7-1.3 1.3-1.9 1.4-.5.1-1.1.2-3.6-.8-3-1.2-4.9-4.2-5-4.4-.1-.2-1.2-1.6-1.2-3.1s.8-2.2 1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.1.1.3 0 .5-.3.6-.6.8-.4 1.1.6 1.1 1.4 1.8 2.5 2.4.3.2.5.1.7-.1l.8-.9c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.5 1.5Z"/></svg></a>
+<div class="toast-wrap" id="toastWrap"></div>
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Imagem ampliada"><button id="lbClose" aria-label="Fechar imagem ampliada">✕</button><img id="lbImg" src="" alt="Imagem ampliada"></div>
+
+<script src="siteConfig.js"></script>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}</script>
+<script src="tooth3d.js" type="module"></script>
+<script src="app.js"></script>
+</body>
+</html>

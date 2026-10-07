@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /aura/
+Sitemap: https://auraodontologia.com.br/sitemap.xml
