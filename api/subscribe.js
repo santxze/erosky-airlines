@@ -33,16 +33,16 @@ async function saveSubscriber(email) {
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_KEY;
   if (!url || !key) return { saved: false, reason: "SUPABASE_NOT_CONFIGURED" };
-  const r = await fetch(`${url.replace(/\/$/, "")}/rest/v1/newsletter_subscribers`, {
-    method: "POST",
-    headers: {
-      apikey: key,
-      Authorization: `Bearer ${key}`,
-      "Content-Type": "application/json",
-      Prefer: "resolution=ignore-duplicates",
-    },
-    body: JSON.stringify({ email }),
-  });
+  const base = `${url.replace(/\/$/, "")}/rest/v1/newsletter_subscribers`;
+  const headers = {
+    apikey: key,
+    Authorization: `Bearer ${key}`,
+    "Content-Type": "application/json",
+  };
+  // já inscrito? (evita 409 do gateway, que ignora Prefer resolution)
+  const chk = await fetch(`${base}?email=eq.${encodeURIComponent(email)}&select=id`, { headers });
+  if (chk.ok && (await chk.json()).length) return { saved: true, duplicate: true };
+  const r = await fetch(base, { method: "POST", headers, body: JSON.stringify({ email }) });
   if (!r.ok) return { saved: false, reason: `SUPABASE_${r.status}` };
   return { saved: true };
 }
