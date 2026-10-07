@@ -206,16 +206,54 @@
   const tripsList = $("#tripsList");
   if (tripsList) {
     const trips = [
-      { code: "ASK8X2", route: "GRU → LIS", date: "18 Nov 2026 · 22:35", status: "Confirmado", color: "#0EC46B" },
-      { code: "ASK4M9", route: "GIG → MIA", date: "05 Dez 2026 · 09:10", status: "Check-in aberto", color: "#2E9BFF" },
+      { code: "ASK8X2", route: "GRU → LIS", date: "18 Nov 2026 · 22:35", seat: "14A", gate: "22B", status: "Confirmado", color: "#0EC46B" },
+      { code: "ASK4M9", route: "GIG → MIA", date: "05 Dez 2026 · 09:10", seat: "23F", gate: "11A", status: "Check-in aberto", color: "#2E9BFF" },
     ];
-    tripsList.innerHTML = trips.map(t => `
-      <div style="border:1.5px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:12px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-        <div style="width:48px;height:48px;border-radius:13px;background:var(--navy-800);display:grid;place-items:center;color:var(--gold-light);font-weight:800">✈</div>
-        <div style="flex:1;min-width:180px"><strong>${t.route}</strong><br><small style="color:var(--muted)">${t.code} · ${t.date}</small></div>
-        <span style="background:${t.color}1A;color:${t.color};font-weight:800;font-size:.78rem;padding:6px 12px;border-radius:100px">● ${t.status}</span>
-        <button class="btn-view" onclick="void 0">Gerenciar</button>
+    tripsList.innerHTML = trips.map((t, i) => `
+      <div style="border:1.5px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:12px">
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+          <div style="width:48px;height:48px;border-radius:13px;background:var(--navy-800);display:grid;place-items:center;color:var(--gold-light);font-weight:800">✈</div>
+          <div style="flex:1;min-width:180px"><strong>${t.route}</strong><br><small style="color:var(--muted)">${t.code} · ${t.date}</small></div>
+          <span data-tripstatus="${i}" style="background:${t.color}1A;color:${t.color};font-weight:800;font-size:.78rem;padding:6px 12px;border-radius:100px">● ${t.status}</span>
+          <button class="btn-view" data-manage="${i}">${t.open ? "Fechar" : "Gerenciar"}</button>
+        </div>
+        <div data-tripdetail="${i}" ${t.open ? "" : "hidden"} style="margin-top:14px;border-top:1px dashed var(--line);padding-top:14px;display:grid;gap:10px">
+          <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:.85rem;color:var(--muted)"><span>💺 Assento <b style="color:var(--ink)">${t.seat}</b></span><span>🚪 Portão <b style="color:var(--ink)">${t.gate}</b></span><span>🧳 1×23kg <b style="color:#0EC46B">incluída</b></span></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-gold" style="padding:10px 18px;font-size:.83rem" data-tripcheckin="${i}">Fazer check-in</button>
+            <button class="btn btn-ghost" style="padding:10px 18px;font-size:.83rem" data-triprebook="${i}">Remarcar</button>
+            <button class="btn btn-ghost" style="padding:10px 18px;font-size:.83rem" data-tripcancel="${i}">Cancelar viagem</button>
+          </div>
+        </div>
       </div>`).join("");
+    const paint = (i, status, color) => {
+      const s = document.querySelector(`[data-tripstatus="${i}"]`);
+      if (s) { s.textContent = "● " + status; s.style.background = color + "1A"; s.style.color = color; }
+    };
+    $$("[data-manage]", tripsList).forEach(b => b.addEventListener("click", () => {
+      const i = b.dataset.manage;
+      const d = document.querySelector(`[data-tripdetail="${i}"]`);
+      const open = d.hidden;
+      d.hidden = !open;
+      b.textContent = open ? "Fechar" : "Gerenciar";
+    }));
+    $$("[data-tripcheckin]", tripsList).forEach(b => b.addEventListener("click", () => {
+      const t = trips[b.dataset.tripcheckin];
+      closeModals(); openModal("checkin");
+      $("#ciCode").value = t.code;
+      toast(`Reserva <b>${t.code}</b> pronta para check-in.`, "success");
+    }));
+    $$("[data-triprebook]", tripsList).forEach(b => b.addEventListener("click", () => {
+      const i = b.dataset.triprebook;
+      paint(i, "Remarcado", "#2E9BFF");
+      toast(`Voo <b>${trips[i].code}</b> remarcado sem taxa (demonstração). Novo bilhete enviado.`, "success");
+    }));
+    $$("[data-tripcancel]", tripsList).forEach(b => b.addEventListener("click", () => {
+      const i = b.dataset.tripcancel;
+      if (!confirm(`Cancelar a viagem ${trips[i].route} (${trips[i].code})? Reembolso em até 7 dias.`)) return;
+      paint(i, "Cancelado", "#E5484D");
+      toast(`Viagem <b>${trips[i].code}</b> cancelada. Reembolso a caminho.`, "info");
+    }));
   }
 
   /* ---------- Formulários ---------- */
